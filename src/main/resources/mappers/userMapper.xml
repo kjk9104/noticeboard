@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.noticeboard.user.dao.UserDAO">
+ 	<select id="selectUserByLoginId" parameterType="String" resultType="boolean">
+		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`user`
+ 		WHERE
+ 			`login_id`= #{loginId};
+ 	</select>
+ 	<select id="selectByNickName" parameterType="String" resultType="boolean">
+		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`user`
+ 		WHERE
+ 			`nick_name`= #{nickName};
+ 	</select>
+ </mapper>
