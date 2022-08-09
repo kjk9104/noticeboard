@@ -16,8 +16,14 @@
 				<div id="idCheckduplicated" class="small text-danger d-none">이미 사용중인 아이디 입니다.</div>
 				<div id="idCheckOk" class="small text-success d-none">사용 가능한 아이디 입니다.</div></td>
 			 	</div>
-				비밀번호<input type="password" class="form-control mb-3">
-				비밀번호 확인<input type="password" class="form-control mb-3">
+				비밀번호<input id="password" type="password" class="form-control mb-3">
+				<div id="passwordCheckLength" class="small text-danger d-none">비밀번호가 위험합니다</div>
+				<div id="passwordCheckduplicated" class="small text-danger d-none">이미 사용중인 아이디 입니다.</div>
+				<div id="passwordCheckOk" class="small text-success d-none">사용 가능한 아이디 입니다.</div></td>
+				비밀번호 확인<input id="duplicatedPassword" password" type="password" class="form-control mb-3">
+				<div id="duplicatedPasswordCheckLength" class="small text-danger d-none">ID을 4자 이상 입력하세요</div>
+				<div id="duplicatedPasswordCheckduplicated" class="small text-danger d-none">이미 사용중인 아이디 입니다.</div>
+				<div id="duplicatedPasswordCheckOk" class="small text-success d-none">사용 가능한 아이디 입니다.</div></td>
 				이름<input type="text" class="form-control">
 				닉네임
 				<div class="d-flex">
@@ -38,7 +44,8 @@
 
 <script>
 $(document).ready(function(){
-	let chk = false;
+	let chkId = false;
+	let chkNickName = false;
 	$("#chk_duplicated_id").on('click',function(){
 		let loginId = $("#loginId").val().trim();
 		$("#idCheckLength").addClass('d-none');
@@ -61,8 +68,8 @@ $(document).ready(function(){
 					$("#idCheckduplicated").removeClass('d-none');
 				}else if(data.result == false){
 					$("#idCheckOk").removeClass('d-none');
-					chk = true;
-					console.log(chk);
+					chkId = true;
+					console.log(chkId);
 				}
 			}
 			,error : function(e){
@@ -77,7 +84,7 @@ $(document).ready(function(){
 		$("#nickNameCheckduplicated").addClass('d-none');
 		$("#nickNameCheckOk").addClass('d-none');
 		if(nickName == ""){
-			alert("아이디를 입력해주세요");
+			alert("닉네임을 입력해주세요");
 			return;	
 		}
 		if(nickName.length < 4){
@@ -92,6 +99,7 @@ $(document).ready(function(){
 					$("#nickNameCheckduplicated").removeClass('d-none');
 				}else if(data.result == false){
 					$("#nickNameCheckOk").removeClass('d-none');
+					chkNickName = false;
 				}
 			}
 			,error : function(e){
@@ -99,12 +107,41 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
-	$("#sign_up").on('click',function(e){
-		if(chk == false){
-			alert("중복확인을 눌러주세요");
-			console.log(chk);
+	$("#password").on('change', function(){
+		let password = $("#password").val();
+		if(password == ""){
+			$("#nickNameCheckOk").removeClass('d-none');
 		}
+	});
+	
+	$("#sign_up").on('click',function(){
+		let password = $("#password").val();
+		let duplicatedPassword = $("#duplicatedPassword").val();
+		let name = $("#name").val().trim();
+		if(chkId == false){
+			alert("아이디 중복확인을 눌러주세요");
+			return;
+		}
+		
+		if(chkNickName == false){
+			alert("닉네임 중복확인을 눌러주세요");
+			return;
+		}
+		
+		if(chkNickName == false){
+			alert("닉네임 중복확인을 눌러주세요");
+			return;
+		}
+		
+		if(password == ""){
+			alert("패스워드를 입력해주세요");
+			return;
+		}
+		if(duplicatedPassword == ""){
+			alert("패스워드를 다시 입력해주세요");
+			return;
+		}
+
 		
 	});
 });
