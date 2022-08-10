@@ -24,4 +24,8 @@ public class UserBO {
 		userDAO.insertUser(loginId, password, name, nickName, eMail, phoneNum);
 		
 	}
+	// 로그인
+	public boolean getByLoginIdAndPassword(String loginId, String loginPassword) {
+		return userDAO.selectByLoginIdAndPassword(loginId, loginPassword);
+	};
 }

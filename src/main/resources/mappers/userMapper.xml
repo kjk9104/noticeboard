@@ -42,4 +42,13 @@
  			,NOW()
  		)
  	</insert>
+ 	<select id="selectByLoginIdAndPassword" parameterType="Map" resultType="boolean">
+ 		SELECT 
+ 			COUNT(*)
+		FROM
+			`user`
+		WHERE
+			login_id=#{loginId} and password = #{password}
+ 	</select>
+ 	
  </mapper>

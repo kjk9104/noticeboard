@@ -3,6 +3,8 @@ package com.noticeboard.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.noticeboard.common.EncryptUtils;
 import com.noticeboard.user.bo.UserBO;
-import com.noticeboard.user.model.User;
 
 @RestController
 @RequestMapping("/user")
@@ -80,5 +81,35 @@ public class userRestController {
 			
 			return result;
 		
+	}
+	/**
+	 * 로그인
+	 * @param loginId
+	 * @param loginPassword
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/sign_in")
+	public Map<String, Object> signIn(
+			@RequestParam("loginId") String loginId
+			,@RequestParam("loginPassword") String loginPassword
+			,HttpSession session
+			){
+		Map<String, Object> result = new HashMap<>();
+		// 세션 저장
+		session.setAttribute("loginId", loginId);
+		// 비밀번호 암호화
+		String encryptPassword = EncryptUtils.md5(loginPassword);
+		// db
+		boolean login = userBO.getByLoginIdAndPassword(loginId, encryptPassword);
+		
+		// 결과
+		if(login) {
+			result.put("result", "success");
+		}else{
+			result.put("errorMessage", "아이디 혹은 비밀번호가 일치하지 않습니다.");
+		}
+		
+		return result;
 	}
 }

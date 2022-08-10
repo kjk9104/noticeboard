@@ -12,7 +12,7 @@ public class userController {
 	@RequestMapping("/sign_in_view")
 	public String signInView(Model model) {
 			
-		model.addAttribute("viewName","sign_in");
+		model.addAttribute("viewName","user/sign_in");
 		model.addAttribute("folder","user");
 		return "/template/layout";
 	}
@@ -21,7 +21,7 @@ public class userController {
 	@RequestMapping("/sign_up_view")
 	public String signUpView(Model model) {
 		
-		model.addAttribute("viewName","sign_up");
+		model.addAttribute("viewName","user/sign_up");
 		model.addAttribute("folder","user");
 		return "/template/layout";
 	}

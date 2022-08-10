@@ -224,7 +224,6 @@ $(document).ready(function(){
 			alert("숫자만 입력해주세요");
 			return;
 		}
-		
 	 	$.ajax({
 	 		type : "POST"
 	 		,url : "/user/sign_up"
@@ -239,7 +238,7 @@ $(document).ready(function(){
 	 		,success : function(data){
 	 			if(data.result == "success"){
 	 				alert("회원가입이 완료 되었습니다.");
-	 				location.href = "https://www.google.com/"
+	 				location.href = "/user/sign_in_view"
 	 			}
 	 		}
 	 		,error : function(e){

@@ -20,5 +20,10 @@ public interface UserDAO {
 			@Param("nickName")String nickName, 
 			@Param("eMail")String eMail, 
 			@Param("phoneNum")String phoneNum);
+	// 로그인
+	public boolean selectByLoginIdAndPassword(
+			@Param("loginId") String loginId
+			,@Param("password") String password
+			); 
 	
 }
