@@ -35,7 +35,7 @@ public final static String FILE_UPLODE_PATH ="D:\\kyu\\Spring_project\\memo\\wor
 			Files.write(path, bytes); //파일 업로드 
 			
 			// 이미지 업로드 성공시 Path를 리턴한다.(WebMvcConfig에서 매핑한 이미지 path)
-			// 예) http://localhost/images/kjk9104_16874828147854/sum.png
+			// 예) http://localhost/images/보라돌이_1660209321404/facebook.png
 			return "/images/" + directoryName + file.getOriginalFilename(); // TODO 파일명은 Path랑 일치하게
 			
 		} catch (IOException e) {
