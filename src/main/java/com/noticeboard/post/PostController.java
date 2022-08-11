@@ -28,6 +28,7 @@ public class PostController {
 		return "/template/layout";
 	}
 	
+	// http://localhost/post/post_create_view
 	@RequestMapping("/post_create_view")
 	public String postCreate(
 			Model model
