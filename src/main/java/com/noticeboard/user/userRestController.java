@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.noticeboard.common.EncryptUtils;
 import com.noticeboard.user.bo.UserBO;
+import com.noticeboard.user.model.User;
 
 @RestController
 @RequestMapping("/user")
@@ -96,8 +97,7 @@ public class userRestController {
 			,HttpSession session
 			){
 		Map<String, Object> result = new HashMap<>();
-		// 세션 저장
-		session.setAttribute("loginId", loginId);
+		
 		// 비밀번호 암호화
 		String encryptPassword = EncryptUtils.md5(loginPassword);
 		// db
@@ -106,6 +106,12 @@ public class userRestController {
 		// 결과
 		if(login) {
 			result.put("result", "success");
+			// db
+			User user = userBO.getByLoginIdAndPasswordforId(loginId, encryptPassword);
+			// 세션 저장
+			session.setAttribute("loginId", loginId);
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userNickname", user.getNick_name());
 		}else{
 			result.put("errorMessage", "아이디 혹은 비밀번호가 일치하지 않습니다.");
 		}

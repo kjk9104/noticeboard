@@ -28,4 +28,8 @@ public class UserBO {
 	public boolean getByLoginIdAndPassword(String loginId, String loginPassword) {
 		return userDAO.selectByLoginIdAndPassword(loginId, loginPassword);
 	};
+	// 로그인2(세션에 id를 저장하기 위해 가져오는 값)
+	public User getByLoginIdAndPasswordforId(String loginId, String loginPassword) {
+		return userDAO.selectByLoginIdAndPasswordforId(loginId, loginPassword);
+	};
 }

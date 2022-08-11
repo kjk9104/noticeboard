@@ -16,4 +16,24 @@
  			`post`
  			
  	</select>
+ 	<insert id="insertPost" parameterType="Map">
+ 		INSERT INTO `post`
+ 			(
+			`user_id`
+			,`subject`
+			,`content`
+			,`imge_path`
+			,`createdAt`
+			,`updatedAt`
+ 			)
+ 		VALUES
+ 			(
+ 			#{userId}
+			,#{subject}
+			,#{content}
+			,#{imagePath}
+			,NOW()
+			,NOW()
+ 			)
+ 	</insert>
  </mapper>

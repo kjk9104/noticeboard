@@ -20,10 +20,16 @@ public interface UserDAO {
 			@Param("nickName")String nickName, 
 			@Param("eMail")String eMail, 
 			@Param("phoneNum")String phoneNum);
+	
 	// 로그인
 	public boolean selectByLoginIdAndPassword(
 			@Param("loginId") String loginId
 			,@Param("password") String password
 			); 
+	
+	// 로그인2(세션에 id를 저장하기 위해 가져오는 값)
+	public User selectByLoginIdAndPasswordforId(
+			@Param("loginId") String loginId
+			,@Param("password") String password);
 	
 }
