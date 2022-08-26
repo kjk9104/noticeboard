@@ -80,23 +80,26 @@ public class CommentBO {
 			
 			return commentDAO.selectCommentCommentByCommentId(commentId);
 		}
+//		 답글(대댓글) 단일목록 불러오기
+		public CommentComment getCommentById(int id) {
+			return commentDAO.selectCommentById(id);
+		}
 		
-	
+		
 //	// 답글(대댓글) 유저 닉네임 댓글 불러오기
 		public List<CommentCommentView> generateCommentCommentVeiwListByCommentId(int commentId){
 			
-			List<CommentComment> commentCommentList = commentDAO.selectCommentCommentByCommentId(commentId);
+			List<CommentComment> commentCommentList = getCommentCommentByCommentId(commentId);
 			List<CommentCommentView> commentCommentViewList = new ArrayList<>();
-			
 			
 			
 			for(CommentComment comments : commentCommentList) {
 				CommentCommentView commentComment = new CommentCommentView();
 				
 				User user = userBO.getByUserId(comments.getUser_id());
-				
+				CommentComment commentCommentcontent = getCommentById(comments.getId());
 				commentComment.setUser(user);
-				commentComment.setCommentComment(commentCommentList);
+				commentComment.setCommentComment(commentCommentcontent);
 				
 				commentCommentViewList.add(commentComment);
 			}

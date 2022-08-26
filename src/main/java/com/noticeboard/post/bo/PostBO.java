@@ -28,7 +28,6 @@ public class PostBO {
 	private UserBO userBO;
 	@Autowired
 	private CommentBO commentBO;
-	
 	// 게시물 목록
 	public List<Post> getPostByOffset(int page, double limit) {
 		int offset = (int) (page*limit);
@@ -66,6 +65,8 @@ public class PostBO {
 		
 		User user = userBO.getByUserId(userId);
 		
+		int countView = post.getCountView();
+		updateCountView(postId,countView);
 		List<CommentView> commentViewList = commentBO.generateCommentVeiwListByPostId(postId);
 		
 		
@@ -104,5 +105,10 @@ public class PostBO {
 			}
 		}
 		postDAO.updatePost(postId, subject, content, imagePath);
+	}
+	
+	public void updateCountView(int postId, int countView) {
+		countView++;
+		postDAO.updateCountView(postId, countView);
 	}
 }

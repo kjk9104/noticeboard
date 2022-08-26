@@ -67,8 +67,18 @@
  		SET	
  			`subject` = #{subject}
  			,`content` = #{content}
+ 			<if test="imagePath != null">
  			,`imge_path` = #{imagePath}
+ 			</if>
  			,`updatedAt`= NOW()
+ 		WHERE
+ 			id = #{postId}
+ 	</update>
+ 	<update id="updateCountView" parameterType="Map">
+ 		UPDATE	
+ 			`post`
+ 		SET	
+ 			countView = #{countView}
  		WHERE
  			id = #{postId}
  	</update>

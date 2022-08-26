@@ -57,7 +57,7 @@
 			,NOW()
  			)
  	</insert>
- 	<select id="selectCommentCommentByCommentId" resultType="com.noticeboard.comment.model.Comment">
+ 	<select id="selectCommentCommentByCommentId" resultType="com.noticeboard.comment.model.CommentComment">
  		SELECT 
  			`id`
 			,`user_id`
@@ -67,5 +67,16 @@
 			,`updatedAt`
  		FROM `comment_comment`
  		WHERE `comment_id`=#{commentId}
+ 	</select>
+ 	<select id="selectCommentById" resultType="com.noticeboard.comment.model.CommentComment">
+ 		SELECT 
+ 			`id`
+			,`user_id`
+			,`comment_id`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+ 		FROM `comment_comment`
+ 		WHERE `id`=#{id}
  	</select>
  </mapper>

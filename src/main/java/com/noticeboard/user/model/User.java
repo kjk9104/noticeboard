@@ -1,6 +1,7 @@
 package com.noticeboard.user.model;
 
-import javax.xml.crypto.Data;
+import java.sql.Date;
+
 
 public class User {
 
@@ -11,9 +12,8 @@ public class User {
 	private String nick_name;
 	private String eMail;
 	private String phone_num;
-	private Data createdAt;
-	private Data updatedAt;
-	
+	private Date createdAt;
+	private Date updatedAt;
 	
 	public int getId() {
 		return id;
@@ -57,17 +57,20 @@ public class User {
 	public void setPhone_num(String phone_num) {
 		this.phone_num = phone_num;
 	}
-	public Data getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(Data createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	public Data getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(Data updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
+	
+
 	
 }

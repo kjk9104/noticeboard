@@ -58,6 +58,7 @@ public class PostController {
 		
 		int userId = (int) session.getAttribute("userId");
 		PostDetail postDetail = postBO.getPostDetail(postId);
+		
 		model.addAttribute("viewName", "post/post_detail");
 		model.addAttribute("post", postDetail);
 		model.addAttribute("userId", userId);

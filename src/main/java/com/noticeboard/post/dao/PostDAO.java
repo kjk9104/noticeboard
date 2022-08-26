@@ -29,5 +29,7 @@ public interface PostDAO {
 			,@Param("content") String content
 			,@Param("imagePath") String imagePath);
 	
+	public void updateCountView(@Param("postId")int postId, @Param("countView")int countView);
+	
 	
 }

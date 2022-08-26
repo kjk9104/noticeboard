@@ -30,4 +30,6 @@ public interface CommentDAO {
 
 	public  List<CommentComment> selectCommentCommentByCommentId(int commentId);
 	
+	public CommentComment selectCommentById(int Id);
+	
 }

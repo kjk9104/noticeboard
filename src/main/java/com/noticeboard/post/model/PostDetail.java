@@ -11,14 +11,8 @@ public class PostDetail {
 	private Post post;
 	private User user;
 	private List<CommentView> commentView;
-	private List<CommentCommentView> commentCommentView;
+
 	
-	public List<CommentCommentView> getCommentCommentView() {
-		return commentCommentView;
-	}
-	public void setCommentCommentView(List<CommentCommentView> commentCommentView) {
-		this.commentCommentView = commentCommentView;
-	}
 	public Post getPost() {
 		return post;
 	}

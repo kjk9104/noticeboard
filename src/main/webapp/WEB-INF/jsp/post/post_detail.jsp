@@ -39,8 +39,13 @@
 					<label class='col-sm-2 col-form-label'>
 						<h3></h3>
 					</label>
-					▶<span>닉네임</span> 
-					<span>내용</span>
+					<div>
+						<c:forEach var="commentComment" items="${comment.commentComment}">
+							▶${commentComment.user.nick_name} :
+							 ${commentComment.commentComment.content} </br>
+						</c:forEach>
+					</div>
+					
 				</div>	
 			</div>
 			<!-- 답글 입력창  -->
@@ -52,7 +57,11 @@
 			</div>
 		</div> 
 		</c:forEach>
+		<div class="d-flex justify-content-end mt-3">
+			<a href="/post/post_list_view?offset=0" class="btn btn-info">목록</a>
+		</div>
 	</div>
+	
 </div>
 <script>
 $(document).ready(function(){
