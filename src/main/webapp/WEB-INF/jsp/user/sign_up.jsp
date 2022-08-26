@@ -66,7 +66,8 @@ $(document).ready(function(){
 		}
 		
 		$.ajax({
-			url : "/user/chk_duplicated_id"			
+			type : "POST"
+			,url : "/user/chk_duplicated_id"			
 			,data : { "loginId" : loginId}
 			,success : function(data){
 				if(data.result == true){

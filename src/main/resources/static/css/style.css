@@ -16,5 +16,11 @@ header {
 .post_content{
 	width: 1000px;
 }
+.post_detail{
+	width: 1000px;
+}
+.post_content{
+	min-height : 600px;
+}
 
 

@@ -36,7 +36,7 @@ public class PermissionInterceptor implements HandlerInterceptor{
 		
 		// 로그인 && "/user" => 글 목록 페이지로 리다이렉트 
 		if(userNickname != null && uri.startsWith("/user")) {
-			response.sendRedirect("/post/post_list_view");
+			response.sendRedirect("/post/post_list_view?offset=0");
 			return false;
 		}
 		return true; // 요청된 path로 컨트롤러 수행

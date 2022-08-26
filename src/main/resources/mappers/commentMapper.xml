@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.noticeboard.comment.dao.CommentDAO">
+ 	<insert id="insertComment" parameterType="Map">
+ 		INSERT INTO `comment`
+ 			(
+			`user_id`
+			,`post_id`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+			)
+ 		VALUES
+ 			(
+ 			#{userId}
+			,#{postId}
+			,#{content}
+			,NOW()
+			,NOW()
+ 			)
+ 	</insert>
+ 	<select id="selectCommentByPostId" resultType="com.noticeboard.comment.model.Comment">
+ 		SELECT 
+ 			`id`
+			,`user_id`
+			,`post_id`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+ 		FROM `comment`
+ 		WHERE `post_id`=#{postId}
+ 	</select>
+ 	<delete id="delteCommentByPostId">
+ 		DELETE FROM `comment`
+ 		WHERE `post_id`= #{postId}
+ 	</delete>
+ 	<delete id="commentDel">
+ 		DELETE FROM `comment`
+ 		WHERE `id`= #{id}
+ 	</delete>
+ 	<insert id="insertCommentComment" parameterType="Map">
+ 		INSERT INTO `comment_comment`
+ 			(
+			`user_id`
+			,`comment_id`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+			)
+ 		VALUES
+ 			(
+ 			#{userId}
+			,#{commentId}
+			,#{commentComment}
+			,NOW()
+			,NOW()
+ 			)
+ 	</insert>
+ 	<select id="selectCommentCommentByCommentId" resultType="com.noticeboard.comment.model.Comment">
+ 		SELECT 
+ 			`id`
+			,`user_id`
+			,`comment_id`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+ 		FROM `comment_comment`
+ 		WHERE `comment_id`=#{commentId}
+ 	</select>
+ </mapper>

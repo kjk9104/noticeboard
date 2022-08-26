@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,7 +65,7 @@ public class userRestController {
 	 * @param phoneNum
 	 * @return
 	 */
-	@RequestMapping("/sign_up")
+	@PostMapping("/sign_up")
 	public Map <String, Object> signUp(
 			@RequestParam("loginId") String loginId
 			,@RequestParam("password") String password
@@ -90,7 +91,7 @@ public class userRestController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping("/sign_in")
+	@PostMapping("/sign_in")
 	public Map<String, Object> signIn(
 			@RequestParam("loginId") String loginId
 			,@RequestParam("loginPassword") String loginPassword
@@ -118,4 +119,6 @@ public class userRestController {
 		
 		return result;
 	}
+	
+	
 }

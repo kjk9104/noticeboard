@@ -3,6 +3,9 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.noticeboard.post.dao.PostDAO">
  	<select id="selectPost" resultType="com.noticeboard.post.model.Post">
+ 		SELECT * FROM `post`
+ 	</select>
+ 	<select id="selectPostByOffset" resultType="com.noticeboard.post.model.Post">
  		SELECT
  			`id`
 			,`user_id`
@@ -14,7 +17,7 @@
 			,`updatedAt`
  		FROM
  			`post`
- 			
+ 		ORDER BY `id` DESC LIMIT 5 OFFSET #{offset}
  	</select>
  	<insert id="insertPost" parameterType="Map">
  		INSERT INTO `post`
@@ -35,5 +38,38 @@
 			,NOW()
 			,NOW()
  			)
+ 			 
  	</insert>
+ 	<select id="selectPostByid" resultType="com.noticeboard.post.model.Post">
+ 		SELECT
+ 			`id`
+			,`user_id`
+			,`subject`
+			,`content`
+			,`imge_path`
+			,`countView`
+			,`createdAt`
+			,`updatedAt`
+ 		FROM
+ 			`post`
+ 		WHERE
+ 			`id` = #{id}
+ 	</select>
+ 	<delete id="deletePostByid">
+ 		DELETE FROM
+ 			`post`
+ 		WHERE
+ 			`id` = #{postId}
+ 	</delete>
+ 	<update id="updatePost" parameterType="Map">
+ 		UPDATE	
+ 			`post`
+ 		SET	
+ 			`subject` = #{subject}
+ 			,`content` = #{content}
+ 			,`imge_path` = #{imagePath}
+ 			,`updatedAt`= NOW()
+ 		WHERE
+ 			id = #{postId}
+ 	</update>
  </mapper>

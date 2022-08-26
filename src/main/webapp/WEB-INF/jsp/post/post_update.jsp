@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<h1>게시물 작성</h1>
+<h1>게시물 수정</h1>
 <div class="d-flex justify-content-center">
 	<div class="post_content">
 		<h3>제목</h3>
 			<div class="d-flex justify-content-center">
-				<input id="subject" type="text" class="form-control">
+				<input id="subject" type="text" class="form-control" value="${post.subject}">
 			</div>
 		<h3>내용</h3>
-		<textarea id="content" rows="20" cols="135"></textarea>
+		<textarea id="content" rows="20" cols="135">${post.content}</textarea>
 		<div class="d-flex justify-content-between">
-			<input id="file" type="file" accept=".jpg,.png,.gif,.jpeg">
+			<input id="file" type="file" accept=".jpg,.png,.gif,.jpeg" value="${post.imge_path}">
 			<button id="postListBtn" type="button" class="btn btn-dark mb-2">목록</button>
 		</div>
 		<div class="d-flex justify-content-end">
-			<button id="savaBtn" type="button" class="btn btn-primary mr-3">저장</button>
+			<button id="savaBtn" type="button" class="btn btn-primary mr-3" data-post-id="${post.id}">수정</button>
 			<button id="clearBtn" type="button" class="btn btn-secondary">모두지우기</button>
 		</div>
 	</div>
@@ -32,9 +32,12 @@ $(document).ready(function(){
 	});
 	// 저장 버튼
 	$("#savaBtn").on('click', function(){
+		
+		let postId = $("#savaBtn").data('post-id');
 		let subject = $('#subject').val();
 		let content = $('#content').val();
 		let file = $('#file').val();
+		
 		
 		if(subject.length < 1){
 			alert("제목을 입력하세요");
@@ -57,13 +60,18 @@ $(document).ready(function(){
 		}
 		
 		let formData = new FormData();
+		formData.append("postId", postId); 
 		formData.append("subject", subject); 
 		formData.append("content", content);
 		formData.append("file", $('#file')[0].files[0]); 
 		
+		console.log(postId);
+		console.log(subject);
+		console.log(content);
+		console.log(file);
 		$.ajax({
-			type : "POST"
-			, url : "/post/create"
+			type : "put"
+			, url : "/post/update"
 			, data : formData
 			, enctype: "multipart/form-data"	 // 파일 업로드 필수 설정
 			, processData: false			// 데이터의 들어가는 것을 String으로 만들어 주는 것을 꺼줌, 파일 업로드 필수 설정

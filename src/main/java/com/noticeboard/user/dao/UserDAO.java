@@ -32,4 +32,7 @@ public interface UserDAO {
 			@Param("loginId") String loginId
 			,@Param("password") String password);
 	
+	// post user 정보
+	public User selectByUserId(int id);
+	
 }

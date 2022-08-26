@@ -21,6 +21,7 @@
 	</div>
 	<div class="d-flex justify-content-end"> 
 		<button id="sign_in" type="button" class="btn btn-primary">로그인</button> 
+		<a href="/user/sign_up_view"  class="btn btn-secondary ml-3">회원가입</a> 
 	</div>
 	</div>
 </div>
@@ -39,9 +40,9 @@ $(document).ready(function(){
 			}
 			,success :  function(data){
 				if(data.result == "success"){
-					location.href = "/post/post_list_view"
+					location.href = "/post/post_list_view?offset=0"
 				}else{
-					alert(data.errorMessage)
+					alert(data.errorMessage);
 				}
 			}
 			,error : function(e){

@@ -66,5 +66,20 @@
 		WHERE
 			login_id=#{loginId} and password = #{password}
  	</select>
- 	
+ 	<select id="selectByUserId" resultType="com.noticeboard.user.model.User">
+ 	SELECT 
+ 			`id`
+			,`login_id`
+			,`password`
+			,`name`
+			,`nick_name`
+			,`eMail`
+			,`phone_num`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`user`
+		WHERE
+			`id` = #{id}
+ 	</select>
  </mapper>

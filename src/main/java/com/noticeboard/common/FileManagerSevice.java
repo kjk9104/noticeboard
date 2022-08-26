@@ -11,14 +11,74 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileManagerSevice {
-public final static String FILE_UPLODE_PATH ="D:\\kyu\\Spring_project\\memo\\workspace\\images/";
+//public final static String FILE_UPLODE_PATH ="D:\\kyu\\Spring_project\\memo\\workspace\\images/";
+public final static String FILE_UPLODE_PATH ="C:\\Users\\kyu01\\Desktop\\kyu_spring_project\\workspace\\image/";
+
+	
 	
 	// input : MultipartFile, userLoginId
 	// output : String path
 	public String savsFile(String userLoginId, MultipartFile file) {
+		String[] arrChosungEng = {"k","K","n","d","D","r","m","b","B","s","S","a","j","J","ch","c","t","p","h"};
+		String[] arrJungsungEng = {"a","e","ya","ae","eo","e","yeo","e","o","wa","wae","oe","yo","u","wo","we","wi","yu","eu","ui","i"};
+		String[] arrJongsungEng = {"","k","K","ks","n","nj","nh","d","l","lg","lm","lb","ls","lt","lt","lp","lh","m","b","bs","s","ss","ng","j","ch","c","t","p","h"};
+		String[] arrsingleJaumEng = {"r","R","rt","s","sw","sg","e","E","f","fr","fa","fq","ft","fx","fv","fg","a","q","Q","qt","t","T","d","w","W","c","z","x","v","g"};
+		
+		String word = userLoginId; // 분리할 단어
+		String resultEng = ""; // 알파벳으로
+		
+		for(int i=0; i<word.length(); i++) {
+			
+			char chars =(char)(word.charAt(i) - 0xAC00);
+			
+			if(chars >= 0 &&chars <= 11172) {
+				// A. 자음과 모음이 합쳐진 글자인경우
+				
+				// A-1 초/중/종성 분리
+				int chosung = chars / (21* 28);
+				int jungsung = chars % (21* 28)/28;
+				int jongsung = chars % (21* 28)%28;
+				
+				// 알파벳으로
+				resultEng = resultEng + arrChosungEng[chosung] + arrJungsungEng[jungsung];
+				
+					if(jongsung != 0x0000) {
+						
+						// A-3 종성이 존재할경우 result에 담는다.
+						
+						resultEng = resultEng + arrJongsungEng[jongsung];
+					} 
+					
+				}else {
+					// B. 한글이 아니거나 자음만 있을경우
+					
+					// 알파벳으로
+					
+					if(chars>=34127 && chars <= 34147) {
+						
+						// 단일모음인 경우
+						int moum = (chars-34127);
+						
+						resultEng = resultEng+arrJungsungEng[moum];
+					} else {
+						// 알파벳인 경우
+						
+						resultEng = resultEng +((char)(chars)+0xAC00);
+						
+					}
+					
+				}// if
+				
+		}// for
+		
+		
+		
+		
+		
+		
 		// 파일명이 겹치지 않게 하기 위해 userLoginId, 현재시간을 경로에 붙여준다.
 		// 파일 디렉토리 경로 예: kjk9104_16874828147854/sum.png
-		String directoryName = userLoginId + "_" + System.currentTimeMillis() + "/";//kjk9104_16874828147854/
+		String directoryName = resultEng + "_" + System.currentTimeMillis() + "/";//kjk9104_16874828147854/
 		// D:\\kyu\\Spring_project\\memo\\workspace\\images/kjk9104_16874828147854/
 		String filePath = FILE_UPLODE_PATH + directoryName;
 		

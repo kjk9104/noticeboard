@@ -1,5 +1,7 @@
 package com.noticeboard.user;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,4 +28,13 @@ public class userController {
 		return "/template/layout";
 	}
 	
+	@RequestMapping("/sign_out")
+	public String signOut(
+			HttpSession session) {
+		session.removeAttribute("loginId");
+		session.removeAttribute("userId");
+		session.removeAttribute("userNickname");
+		
+		return "redirect:/user/sign_in_view";
+	}
 }

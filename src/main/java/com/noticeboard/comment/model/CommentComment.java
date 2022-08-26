@@ -1,15 +1,12 @@
-package com.noticeboard.post.model;
+package com.noticeboard.comment.model;
 
 import java.util.Date;
 
-public class Post {
-
+public class CommentComment {
 	private int id;
 	private int user_id;
-	private String subject;
+	private int comment_id;
 	private String content;
-	private String imge_path;
-	private int countView;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -25,29 +22,17 @@ public class Post {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-	public String getSubject() {
-		return subject;
+	public int getComment_id() {
+		return comment_id;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setComment_id(int comment_id) {
+		this.comment_id = comment_id;
 	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public String getImge_path() {
-		return imge_path;
-	}
-	public void setImge_path(String imge_path) {
-		this.imge_path = imge_path;
-	}
-	public int getCountView() {
-		return countView;
-	}
-	public void setCountView(int countView) {
-		this.countView = countView;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
@@ -61,10 +46,5 @@ public class Post {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
-	
-	
-	
-	
 	
 }
