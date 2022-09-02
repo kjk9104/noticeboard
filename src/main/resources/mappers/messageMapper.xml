@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.noticeboard.message.dao.MessageDAO">
+ 	<insert id="insertMessage">
+ 	INSERT INTO `message`
+ 		(	
+			`user_nickName`
+			,`other_nick_name`
+			,`talk`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+        (
+        	#{userNick}
+        	,#{otherNick}
+        	,#{talk}
+        	,NOW()
+        	,NOW()
+        );
+ 	</insert>
+ 	
+ 	<!--받은 메일함  -->
+ 	<select id="selectMessageListByNickFromOtherNick" resultType="com.noticeboard.message.model.Message">
+ 		SELECT
+ 			*
+ 		FROM
+ 			`message`
+ 		WHERE
+ 			`other_nick_name`= #{otherNick}
+ 	</select>
+ 	
+ 	<!--보낸 메일함 -->
+ 	<select id="selectMessageListByNickFromUserNick" resultType="com.noticeboard.message.model.Message">
+ 		SELECT
+ 			*
+ 		FROM
+ 			`message`
+ 		WHERE
+ 			`user_nickName`= #{userNick}
+ 	</select>
+ </mapper>

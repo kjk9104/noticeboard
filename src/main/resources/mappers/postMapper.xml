@@ -2,9 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.noticeboard.post.dao.PostDAO">
+ 
+ 	<!--목록 전체 사이즈를 알기위한 selects  -->
  	<select id="selectPost" resultType="com.noticeboard.post.model.Post">
  		SELECT * FROM `post`
  	</select>
+ 	
+ 	<!-- 최신순 목록 select  -->
  	<select id="selectPostByOffset" resultType="com.noticeboard.post.model.Post">
  		SELECT
  			`id`
@@ -19,6 +23,47 @@
  			`post`
  		ORDER BY `id` DESC LIMIT 5 OFFSET #{offset}
  	</select>
+ 	
+ 	<!-- 조회수 목록 select  -->
+ 	<select id="selectPostByCountViewAndOffset" resultType="com.noticeboard.post.model.Post">
+ 		SELECT
+ 			`id`
+			,`user_id`
+			,`subject`
+			,`content`
+			,`imge_path`
+			,`countView`
+			,`createdAt`
+			,`updatedAt`
+ 		FROM
+ 			`post`
+ 		ORDER BY `countView` DESC limit 5 offset #{offset}
+ 	</select>
+ 	
+ 	<!-- 검색어 최신순 목록 select  -->
+ 	<select id="selectPostBySerchWordAndOffset" resultType="com.noticeboard.post.model.Post" parameterType="Map">
+ 		SELECT
+ 			`id`
+			,`user_id`
+			,`subject`
+			,`content`
+			,`imge_path`
+			,`countView`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+ 			`post`
+ 		WHERE 
+ 			`subject`
+ 		LIKE 
+ 			#{searchWord}
+ 		OR
+ 			`content`
+ 		LIKE 
+ 			#{searchWord}  ORDER BY `id` DESC limit 5 offset #{offset}
+ 	</select>
+ 	
+ 	<!--게시물 추가 -->
  	<insert id="insertPost" parameterType="Map">
  		INSERT INTO `post`
  			(
@@ -40,6 +85,7 @@
  			)
  			 
  	</insert>
+ 	<!-- 게시물 상세 페이지 select  -->
  	<select id="selectPostByid" resultType="com.noticeboard.post.model.Post">
  		SELECT
  			`id`
@@ -55,12 +101,15 @@
  		WHERE
  			`id` = #{id}
  	</select>
+ 	<!-- 게시물 삭제  -->
  	<delete id="deletePostByid">
  		DELETE FROM
  			`post`
  		WHERE
  			`id` = #{postId}
  	</delete>
+ 	
+ 	<!--게시물 업데이트  -->
  	<update id="updatePost" parameterType="Map">
  		UPDATE	
  			`post`
@@ -74,6 +123,7 @@
  		WHERE
  			id = #{postId}
  	</update>
+ 	<!--게시물 조회수 추가  -->
  	<update id="updateCountView" parameterType="Map">
  		UPDATE	
  			`post`

@@ -59,29 +59,4 @@ public class CommentRestController {
 		
 	}
 	
-	/**
-	 * 답글 작성 (대댓글)
-	 * @param commentId
-	 * @param commentComment
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping("comment_create")
-	public Map<String, Object>addCommentComment(
-			@RequestParam("commentId") int commentId
-			,@RequestParam("commentComment") String commentComment
-			,HttpSession session
-			){
-			Map<String, Object> result = new HashMap<>();
-			int userId = (int) session.getAttribute("userId");
-			
-			commentBO.addCommentComment(commentId, userId, commentComment);
-			
-			result.put("result", "success");
-			
-			
-			return result;
-		
-		
-	}
 }

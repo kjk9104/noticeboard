@@ -1,5 +1,6 @@
 package com.noticeboard.user.dao;
 
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -34,5 +35,7 @@ public interface UserDAO {
 	
 	// post user 정보
 	public User selectByUserId(int id);
+	// user리스트
+//	public User selectUserByPostId(int id);
 	
 }

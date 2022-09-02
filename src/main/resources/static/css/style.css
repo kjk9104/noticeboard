@@ -22,5 +22,24 @@ header {
 .post_content{
 	min-height : 600px;
 }
-
-
+#like_img{
+	width : 40px;
+}
+.serchBox{
+	width :  500px;
+}
+#nav_box{
+	width :  800px;
+}
+#message_nav{
+	width : 400px;
+	min-height : 600px;
+	float: left;
+}
+#msg_table{
+	width :800px;
+	
+}
+#calendar{
+	width :800px;
+}

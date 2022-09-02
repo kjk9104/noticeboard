@@ -18,7 +18,14 @@
  		WHERE
  			`nick_name`= #{nickName};
  	</select>
- 	
+<!--  	<select id="selectUserListByPostId"  resultType="com.noticeboard.user.model.User"> -->
+<!-- 		SELECT -->
+<!--  			COUNT(*) -->
+<!--  		FROM -->
+<!--  			`user` -->
+<!--  		WHERE -->
+<!--  			`id`= #{id}; -->
+<!--  	</select>	 -->
  	<insert id="insertUser" parameterType="Map">
  		INSERT INTO `user`
  		(
@@ -68,7 +75,7 @@
 			login_id=#{loginId} and password = #{password}
  	</select>
  	<select id="selectByUserId" resultType="com.noticeboard.user.model.User">
- 	
+
  	SELECT 
  			`id`
 			,`login_id`

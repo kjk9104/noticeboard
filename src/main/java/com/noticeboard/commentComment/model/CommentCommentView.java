@@ -1,5 +1,4 @@
-package com.noticeboard.comment.model;
-
+package com.noticeboard.commentComment.model;
 
 import com.noticeboard.user.model.User;
 

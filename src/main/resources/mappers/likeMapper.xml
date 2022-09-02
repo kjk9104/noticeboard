@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.noticeboard.like.dao.LikeDAO">
+ 	<select id="selectLikeByUserIdAndPostId" parameterType="Map" resultType="boolean">
+ 		SELECT 
+	 		COUNT(*)
+		FROM
+			`like`
+		WHERE
+			`user_id` =#{userId}
+		AND	
+		 	`post_id` = #{postId}
+ 	</select>
+ 	
+ 	<insert id="insertLike">
+ 		INSERT INTO `like`
+ 			(
+ 			`user_id`
+ 			,`post_id`
+ 			,`createdAt`
+ 			,`updatedAt`
+ 			)
+ 		VALUES
+ 			(
+ 			#{userId}
+ 			,#{postId}
+ 			,NOW()
+ 			,NOW()
+ 			)
+ 	</insert>
+ 	
+ 	<delete id="deleteLike">
+ 		DELETE FROM
+ 			`like`
+ 		WHERE
+ 			`user_id` = #{userId}
+ 		AND 
+ 			`post_id` =  #{postId}
+ 	</delete>
+ 	
+ 	<delete id="delLikeByPostId">
+ 		DELETE FROM
+ 			`like`
+ 		WHERE
+ 			`post_id` =  #{postId}
+ 	</delete>
+ 	
+ 	<select id="selectLikeListByPostId" resultType="com.noticeboard.like.model.Like">
+ 		SELECT
+ 			*
+ 		FROM
+ 			`like`
+ 		WHERE
+ 			`post_id` = #{postId}
+ 	</select>
+ </mapper>

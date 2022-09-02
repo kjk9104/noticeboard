@@ -24,7 +24,15 @@ public class PostRestController {
 	private PostBO postBO;
 	@Autowired
 	private CommentBO commentBO;
-	// 게시물 작성
+	
+	/**
+	 * 게시물 작성
+	 * @param subject
+	 * @param content
+	 * @param file
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/create")
 	public Map<String, Object> create(
 			@RequestParam("subject") String subject
@@ -55,8 +63,11 @@ public class PostRestController {
 			
 		return result;
 	}
-	
-	// 게시물 삭제
+	/**
+	 * 게시물 삭제
+	 * @param postId
+	 * @return
+	 */
 	@DeleteMapping("/delete")
 	public Map<String, Object> deletePost(
 			@RequestParam("postId") int postId ){
@@ -67,7 +78,15 @@ public class PostRestController {
 		
 		return result;
 	}
-	// 게시물 수정
+	/**
+	 *  게시물 수정
+	 * @param postId
+	 * @param subject
+	 * @param content
+	 * @param file
+	 * @param session
+	 * @return
+	 */
 	@PutMapping("/update")
 	public Map<String, Object> updatePost(
 			@RequestParam("postId") int postId

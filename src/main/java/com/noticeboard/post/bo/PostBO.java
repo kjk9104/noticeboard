@@ -1,6 +1,7 @@
 package com.noticeboard.post.bo;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.noticeboard.comment.bo.CommentBO;
-import com.noticeboard.comment.model.Comment;
-import com.noticeboard.comment.model.CommentCommentView;
 import com.noticeboard.comment.model.CommentView;
 import com.noticeboard.common.FileManagerSevice;
+import com.noticeboard.like.bo.LikeBO;
+import com.noticeboard.like.model.Like;
 import com.noticeboard.post.dao.PostDAO;
 import com.noticeboard.post.model.Post;
 import com.noticeboard.post.model.PostDetail;
+import com.noticeboard.post.model.PostListView;
 import com.noticeboard.user.bo.UserBO;
 import com.noticeboard.user.model.User;
 
@@ -28,16 +30,46 @@ public class PostBO {
 	private UserBO userBO;
 	@Autowired
 	private CommentBO commentBO;
-	// 게시물 목록
-	public List<Post> getPostByOffset(int page, double limit) {
+	@Autowired
+	private LikeBO likeBO;
+	// 게시물 리스트
+	public List<PostListView> getPostByOffset(int page, double limit, String selected, String searchWord) {
 		int offset = (int) (page*limit);
-		return postDAO.selectPostByOffset(offset);
+
+		List<Post> postList = postDAO.selectPostByOffset(offset);
+		List<PostListView> postListView = new ArrayList<>();
+		
+		if(selected.equals("조회수")) {
+			postList = postDAO.selectPostByCountViewAndOffset(offset);
+		}
+		
+		if(searchWord != null) {
+			postList = postDAO.selectPostBySerchWordAndOffset(offset, searchWord);
+		}
+		
+		for(Post post : postList) {
+			PostListView postView = new PostListView(); 
+			User user = userBO.getByUserId(post.getUser_id());
+			
+			List<Like> likeList = likeBO.getLikeListByPostId(post.getId());
+			int likeSize = likeList.size();
+			
+			postView.setPost(post);
+			postView.setUser(user);
+			postView.setLikeSize(likeSize);
+			
+			postListView.add(postView);
+		}
+		
+		return postListView;
 		
 	}
+	// 게시물 페이징을 위한 db select
 	public List<Post> getPost() {
 		return postDAO.selectPost();
 	}
-	// 게시물 생성
+	
+	// 게시물 저장
 	public void addPost (
 			int userId
 			,String userNickname
@@ -56,9 +88,11 @@ public class PostBO {
 	public Post getPostByid(int id) {
 		return postDAO.selectPostByid(id);
 	}
+	
 	// 게시물 상세 정보
-	public PostDetail getPostDetail(int postId){
+	public PostDetail getPostDetail(int postId, int userIdex){
 		PostDetail postDetail = new PostDetail();
+		
 		
 		Post post = getPostByid(postId);
 		int userId = post.getUser_id();
@@ -69,12 +103,17 @@ public class PostBO {
 		updateCountView(postId,countView);
 		List<CommentView> commentViewList = commentBO.generateCommentVeiwListByPostId(postId);
 		
+		boolean like = likeBO.getLikeByuserIdAndPostId(postId, userIdex);
+		List<Like> likeList = likeBO.getLikeListByPostId(postId);
+		int likeSize = likeList.size();
+		
 		
 		postDetail.setPost(post);
 		postDetail.setUser(user);
 		postDetail.setCommentView(commentViewList);
-		
-		
+		postDetail.setLike(like);
+		postDetail.setLikeCount(likeSize);
+			
 		return postDetail;
 		
 	}
@@ -82,6 +121,8 @@ public class PostBO {
 	// 게시물 삭제
 	public void deletePostByid(int postId) {
 		postDAO.deletePostByid(postId);
+		commentBO.delteCommentByPostId(postId);
+		likeBO.delLikeByPostId(postId);
 	}
 	
 	// 게시물 수정

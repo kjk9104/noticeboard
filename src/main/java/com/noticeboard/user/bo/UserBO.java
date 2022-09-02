@@ -1,5 +1,6 @@
 package com.noticeboard.user.bo;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +33,12 @@ public class UserBO {
 	public User getByLoginIdAndPasswordforId(String loginId, String loginPassword) {
 		return userDAO.selectByLoginIdAndPasswordforId(loginId, loginPassword);
 	};
-	// post user정보 가져오기
+	// post user단일 정보 가져오기
 	public User getByUserId(int id) {
 		return userDAO.selectByUserId(id);
 	}
+//	// postId로 user 가져오기
+//	public User getUserByPostId(int id){
+//		return userDAO.selectUserByPostId(id);
+//	}
 }

@@ -40,7 +40,7 @@ $(document).ready(function(){
 			}
 			,success :  function(data){
 				if(data.result == "success"){
-					location.href = "/post/post_list_view?offset=0"
+					location.href = "/post/post_list_view?offset=0&&selectBox='최신순'"
 				}else{
 					alert(data.errorMessage);
 				}

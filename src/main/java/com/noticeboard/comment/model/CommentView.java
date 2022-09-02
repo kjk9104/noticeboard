@@ -2,6 +2,7 @@ package com.noticeboard.comment.model;
 
 import java.util.List;
 
+import com.noticeboard.commentComment.model.CommentCommentView;
 import com.noticeboard.user.model.User;
 
 public class CommentView {

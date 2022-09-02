@@ -10,12 +10,25 @@
 		<div class="post_content d-flex">
 			<h3 class="mr-5">내용</h3> <span>${post.post.content}</span>
 		</div>
-		<c:if test="${userId eq post.user.id}">
-			<div class="d-flex justify-content-end m-3">
-				<a id="updatePostBtn" type="button" href="/post/post_update_view?postId=${post.post.id}" class="btn btn-light">수정</a>
-				<button id="delPostBtn" type="button" data-post-id="${post.post.id}" class="ml-3 btn btn-secondary">삭제</button>
+		<div>
+			<div class="d-flex justify-content-end mb-5 mr-5">
+				<a id="like_btn" data-post-id="${post.post.id}" href="#">
+					${post.likeCount}
+					<c:if test="${post.like eq false}">
+						<img id="like_img" alt="like"src="/static/img/like_off.png"> 
+					</c:if> 
+					<c:if test="${post.like eq true}">
+						<img id="like_img" alt="like"src="/static/img/like_on.png"> 
+					</c:if> 
+				</a>
 			</div>
-		</c:if>
+			<c:if test="${userId eq post.user.id}">
+				<div class="d-flex justify-content-end m-3">
+					<a id="updatePostBtn" type="button" href="/post/post_update_view?postId=${post.post.id}" class="btn btn-light">수정</a>
+					<button id="delPostBtn" type="button" data-post-id="${post.post.id}" class="ml-3 btn btn-secondary">삭제</button>
+				</div>
+			</c:if>
+		</div>
 		<!-- 댓글 쓰기  -->
 		<div class="d-flex">
 			<label class="col-sm-2 col-form-label"><h3>댓글</h3></label>
@@ -33,7 +46,7 @@
 					<a class="commentDelBtn" data-comment-id="${comment.comment.id}" href="#">삭제</a>
 				</c:if>
 			</div>
-			<!-- 답글 리스트  -->
+			<!-- 답글(대댓글) 리스트  -->
 			<div class='comment_comment_box d-none'>
 				<div class="d-flex mb-3">
 					<label class='col-sm-2 col-form-label'>
@@ -42,17 +55,18 @@
 					<div>
 						<c:forEach var="commentComment" items="${comment.commentComment}">
 							▶${commentComment.user.nick_name} :
-							 ${commentComment.commentComment.content} </br>
+							 ${commentComment.commentComment.content} 
+							 <a class="delCommentCommentBtn ml-3" href="#" data-comment_comment-id="${commentComment.commentComment.id}">삭제</a>
+							 </br>
 						</c:forEach>
 					</div>
-					
 				</div>	
 			</div>
-			<!-- 답글 입력창  -->
+			<!-- 답글(대댓글) 입력창  -->
 			<div class='comment_commentDiv d-none'>
 				<div class="d-flex">
 					<input type='text' class='form-control' placeholder='답글입력'>
-					<a class='add_comment_comment btn btn-primary text-light' data-comment-id='${comment.comment.id}'>입력</a>
+					<a class='add_comment_comment btn btn-primary text-light' data-post-id="${post.post.id}" data-comment-id='${comment.comment.id}'>입력</a>
 				</div>
 			</div>
 		</div> 
@@ -64,6 +78,7 @@
 	
 </div>
 <script>
+
 $(document).ready(function(){
 	// 게시물 삭제 버튼
 	$("#delPostBtn").on('click', function(){
@@ -95,6 +110,7 @@ $(document).ready(function(){
 	$("#commentBtn").on('click',function(){
 		let content = $("#comment").val();
 		let postId = $(this).data('post-id');
+		
 		
 		if(comment == ""){
 			alert("댓글을 입력해주세요");
@@ -145,7 +161,6 @@ $(document).ready(function(){
 		e.preventDefault();
 		if(comment_commentBoolen){
 			$(this).parent('div').siblings('div').removeClass('d-none');
-			$(this).parent('div').after("");
 			comment_commentBoolen = false;
 		}else{
 			$('.comment_comment_box').addClass('d-none');
@@ -157,12 +172,17 @@ $(document).ready(function(){
 	
 	// 답글(대 댓글) 입력
 	$(".add_comment_comment").on('click', function(){
+		
+		let postId = $(this).data('post-id');
 		let commentId = $(this).data('comment-id');
 		let commentComment = $(this).siblings('input').val();
+		
+		
 			$.ajax({
-				url : "/comment/comment_create"
+				url : "/commentComment/create"
 				,data : {
-					"commentId" : commentId
+					"postId" :  postId
+					,"commentId" : commentId
 					,"commentComment" : commentComment
 				}
 				,success :  function(data){
@@ -176,6 +196,50 @@ $(document).ready(function(){
 			});
 	});
 	
+	// 답글(대댓글 삭제)
+	$(".delCommentCommentBtn").on('click', function(){
+		let id = $(this).data('comment_comment-id');
+		$.ajax({
+			type : "delete"
+			,url : "/commentComment/delete"
+			,data : {
+				"id" :  id
+			}
+			,success : function(data){
+				if(data.result == "success"){
+					alert("대댓글 삭제")
+					location.reload(true);
+				}
+			}
+			,erorr : function(e){
+				alert("통신이 실패 했습니다.");
+			}
+		});
+	});
+	
+	
+	// 추천 버튼
+	$("#like_btn").on('click', function(e){
+		e.preventDefault();
+		let postId = $(this).data('post-id');
+		
+		$.ajax({
+			url :  "/like/like"
+			,data : {
+				"postId":  postId
+			}
+			,success : function(data){
+				if(data.result == "success"){
+					location.reload(true);
+				}else{
+					alert("서버 에러");
+				}
+			}
+			,error :  function(e){
+				alert("통신 실패");
+			}
+		});
+	});
 	
 
 	

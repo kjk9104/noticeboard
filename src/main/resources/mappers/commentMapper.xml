@@ -31,52 +31,26 @@
  		FROM `comment`
  		WHERE `post_id`=#{postId}
  	</select>
+ 	
  	<delete id="delteCommentByPostId">
  		DELETE FROM `comment`
  		WHERE `post_id`= #{postId}
  	</delete>
+
+<!--  	<delete id="delteCommentCommentByPostId"> -->
+<!--  		DELETE FROM `comment_comment` -->
+<!--  		WHERE `post_id`= #{postId} -->
+<!--  	</delete> -->
+ 	
  	<delete id="commentDel">
  		DELETE FROM `comment`
  		WHERE `id`= #{id}
  	</delete>
- 	<insert id="insertCommentComment" parameterType="Map">
- 		INSERT INTO `comment_comment`
- 			(
-			`user_id`
-			,`comment_id`
-			,`content`
-			,`createdAt`
-			,`updatedAt`
-			)
- 		VALUES
- 			(
- 			#{userId}
-			,#{commentId}
-			,#{commentComment}
-			,NOW()
-			,NOW()
- 			)
- 	</insert>
- 	<select id="selectCommentCommentByCommentId" resultType="com.noticeboard.comment.model.CommentComment">
- 		SELECT 
- 			`id`
-			,`user_id`
-			,`comment_id`
-			,`content`
-			,`createdAt`
-			,`updatedAt`
- 		FROM `comment_comment`
- 		WHERE `comment_id`=#{commentId}
- 	</select>
- 	<select id="selectCommentById" resultType="com.noticeboard.comment.model.CommentComment">
- 		SELECT 
- 			`id`
-			,`user_id`
-			,`comment_id`
-			,`content`
-			,`createdAt`
-			,`updatedAt`
- 		FROM `comment_comment`
- 		WHERE `id`=#{id}
- 	</select>
+ 	
+<!--  	<delete id="commentCommentDelByCommentId"> -->
+<!--  		DELETE FROM `comment_comment` -->
+<!--  		WHERE `comment_id`= #{commentId} -->
+<!--  	</delete> -->
+ 	
+ 	
  </mapper>

@@ -1,12 +1,12 @@
-package com.noticeboard.comment.model;
+package com.noticeboard.like.model;
 
 import java.util.Date;
 
-public class CommentComment {
+public class Like {
+	
 	private int id;
 	private int user_id;
-	private int comment_id;
-	private String content;
+	private int post_id;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -22,17 +22,11 @@ public class CommentComment {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-	public int getComment_id() {
-		return comment_id;
+	public int getPost_id() {
+		return post_id;
 	}
-	public void setComment_id(int comment_id) {
-		this.comment_id = comment_id;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setPost_id(int post_id) {
+		this.post_id = post_id;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
@@ -46,5 +40,6 @@ public class CommentComment {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
 	
 }

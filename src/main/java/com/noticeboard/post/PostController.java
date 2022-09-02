@@ -1,5 +1,4 @@
 package com.noticeboard.post;
-
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.noticeboard.post.bo.PostBO;
 import com.noticeboard.post.model.Post;
 import com.noticeboard.post.model.PostDetail;
+import com.noticeboard.post.model.PostListView;
 
 @Controller
 @RequestMapping("/post")
@@ -24,17 +24,28 @@ public class PostController {
 	@RequestMapping("/post_list_view")
 	public String postList(Model model
 			,@RequestParam(value="offset", required=false) int page 
+			,@RequestParam(value="selectBox", required=false) String selected 
+			,@RequestParam(value="searchWord", required=false) String searchWord 
 			) {
 		
 		double limit = 5;
-		List<Post> postList = postBO.getPostByOffset(page, limit);
+		
+		if(selected == null) {
+			selected = "최신순";
+		}
+		
+		
+		List<PostListView> postList = postBO.getPostByOffset(page, limit, selected, searchWord);
 		List<Post> postAllList = postBO.getPost();
+		
 		int totalpage = (int) Math.ceil(postAllList.size()/limit); 
 		
 		model.addAttribute("viewName", "post/post_list");
 		model.addAttribute("postList", postList);
 		model.addAttribute("totalpage", totalpage);
 		model.addAttribute("page", page);
+		model.addAttribute("selected", selected);
+		
 		return "/template/layout";
 	}
 	
@@ -57,7 +68,7 @@ public class PostController {
 			) {
 		
 		int userId = (int) session.getAttribute("userId");
-		PostDetail postDetail = postBO.getPostDetail(postId);
+		PostDetail postDetail = postBO.getPostDetail(postId, userId);
 		
 		model.addAttribute("viewName", "post/post_detail");
 		model.addAttribute("post", postDetail);

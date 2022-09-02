@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.noticeboard.notice.dao.NoticeDAO">
+	<!--공지 일정 추가  -->
+ 	<insert id="insertNotice" parameterType="Map">
+ 		INSERT INTO `notice`
+ 			(
+			`user_id`
+			,`subject`
+			,`content`
+			,`imge_path`
+			,`start_schedule`
+			,`end_schedule`
+			,`createdAt`
+			,`updatedAt`
+ 			)
+ 		VALUES
+ 			(
+ 			#{userId}
+			,#{subject}
+			,#{content}
+			,#{imagePath}
+			,#{startDate}
+			,#{endDate}
+			,NOW()
+			,NOW()
+ 			)
+ 	</insert>
+ 	<select id="selectNoticeList" resultType="com.noticeboard.notice.model.Notice">
+ 		SELECT * FROM `notice`;
+ 	</select>
+ 	
+ 	<select id="selectNotice" resultType="com.noticeboard.notice.model.Notice">
+ 		SELECT 
+ 			* 
+ 		FROM 
+ 			`notice`
+ 		WHERE
+ 			`id`=#{id};
+ 	</select>
+ 	
+ 	<delete id="delNotice">
+ 		DELETE FROM
+ 			`notice`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
+ </mapper>

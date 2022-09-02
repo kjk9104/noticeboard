@@ -91,7 +91,53 @@ public final static String FILE_UPLODE_PATH ="C:\\Users\\kyu01\\Desktop\\kyu_spr
 		// 파일 업로드: byte 단위로 업로드 한다.
 		try {
 			byte[] bytes = file.getBytes();
-			Path path = Paths.get(filePath + file.getOriginalFilename());	// TODO 파일명을 영어로 만들게
+			word = file.getOriginalFilename();
+			resultEng = "";
+			for(int i=0; i<word.length(); i++) {
+				
+				char chars =(char)(word.charAt(i) - 0xAC00);
+				
+				if(chars >= 0 &&chars <= 11172) {
+					// A. 자음과 모음이 합쳐진 글자인경우
+					
+					// A-1 초/중/종성 분리
+					int chosung = chars / (21* 28);
+					int jungsung = chars % (21* 28)/28;
+					int jongsung = chars % (21* 28)%28;
+					
+					// 알파벳으로
+					resultEng = resultEng + arrChosungEng[chosung] + arrJungsungEng[jungsung];
+					
+						if(jongsung != 0x0000) {
+							
+							// A-3 종성이 존재할경우 result에 담는다.
+							
+							resultEng = resultEng + arrJongsungEng[jongsung];
+						} 
+						
+					}else {
+						// B. 한글이 아니거나 자음만 있을경우
+						
+						// 알파벳으로
+						
+						if(chars>=34127 && chars <= 34147) {
+							
+							// 단일모음인 경우
+							int moum = (chars-34127);
+							
+							resultEng = resultEng+arrJungsungEng[moum];
+						} else {
+							// 알파벳인 경우
+							
+							resultEng = resultEng +((char)(chars)+0xAC00);
+							
+						}
+						
+					}// if
+					
+			}// for
+			
+			Path path = Paths.get(filePath + resultEng);	// TODO 파일명을 영어로 만들게
 			Files.write(path, bytes); //파일 업로드 
 			
 			// 이미지 업로드 성공시 Path를 리턴한다.(WebMvcConfig에서 매핑한 이미지 path)
