@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
-    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <div id="message_nav" class="row d-flex justify-content-end">   
 	<div> 
 		<div class="mt-3">
@@ -23,15 +24,27 @@
 	<table id="msg_table" class="table">
 		<thead>
 			<tr>
+				<th>반호</th>
 				<th>보낸사람</th>
 				<th>쪽지 내용</th>
 			</tr>
 		</thead>
-	<c:forEach var="message" items="${MessageList}">
+	<c:forEach var="message" items="${MessageList}" varStatus ="status">
 		<tbody>
 			<tr>
+				<td>${status.count}</td>
 				<td>${message.user_nickName}</td>
-				<td>${message.talk}</td>
+				
+				<td>
+					<a href="#">
+						<c:if test="${fn.length(message.talk) > 15}">
+							${fn:substring(message.talk,0,15)}...
+						</c:if>	
+						<c:if test="${fn:length(message.talk) <= 15}">
+												${message.talk}
+						</c:if>
+					</a>
+				</td>
 			</tr>
 		</tbody>
 	</c:forEach>
@@ -79,7 +92,7 @@
 <script>
 $(document).ready(function(){
 	// 닉네임 있는지 검사
-	$("#recipient-name").on('keyup',function(){
+	$("#recipient-name").on('change',function(){
 		let userNickname = $(this).val().trim();
 		$("#trueNickname").addClass('d-none');
 		$("#falseNickname").addClass('d-none');
