@@ -12,7 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class FileManagerSevice {
 //public final static String FILE_UPLODE_PATH ="D:\\kyu\\Spring_project\\memo\\workspace\\images/";
-public final static String FILE_UPLODE_PATH ="C:\\Users\\kyu01\\Desktop\\kyu_spring_project\\workspace\\image/";
+//public final static String FILE_UPLODE_PATH ="C:\\Users\\kyu01\\Desktop\\kyu_spring_project\\workspace\\image/";
+public final static String FILE_UPLODE_PATH ="/home/ec2-user/images/";
+
 
 	
 	
