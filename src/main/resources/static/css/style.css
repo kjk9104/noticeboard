@@ -33,7 +33,7 @@ header {
 }
 #message_nav{
 	width : 400px;
-	min-height : 600px;
+	min-height : 500px;
 	float: left;
 }
 #msg_table{

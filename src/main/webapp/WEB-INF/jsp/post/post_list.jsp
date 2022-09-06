@@ -34,12 +34,14 @@
 </div>
 <div class="d-flex justify-content-center">
 <a id="beforeBtn" class="btn" href="#" data-page-id="${page}">이전</a>
-<c:forEach var="postList" begin="1" end="${totalpage}" varStatus="status">
-	<c:if test="${page eq status.count-1}">
-		<a class="offset btn btn-outline-primary mr-3" href="/post/post_list_view?offset=${status.count-1}&&selectBox=${selected}">${status.count}</a>
+
+
+<c:forEach var="postList" begin="${startNum}" end="${endtNum}" varStatus="status">
+	<c:if test="${page eq status.index}">
+		<a class="offset btn btn-outline-primary mr-3" href="/post/post_list_view?offset=${status.index-1}&&selectBox=${selected}">${status.index}</a>
 	</c:if>
-	<c:if test="${page ne status.count-1}">
-		<a class="offset btn mr-3" href="/post/post_list_view?offset=${status.count-1}&&selectBox=${selected}">${status.count}</a>
+	<c:if test="${page ne status.index}">
+		<a class="offset btn mr-3" href="/post/post_list_view?offset=${status.index-1}&&selectBox=${selected}">${status.index}</a>
 	</c:if>
 </c:forEach>
 	<a id="afterBtn" class="btn" href="#" data-page-id="${page}"data-totalpage="${totalpage}">다음</a>
@@ -84,7 +86,7 @@ $(document).ready(function(){
 		console.log(selected);
 		let pageNum = page+1;
 		if(pageNum >= totalpage){
-			pageNum = totalpage-1;
+			pageNum = totalpage;
 		}
 		location.href="/post/post_list_view?offset="+(pageNum)+"&&selectBox="+(selected);
 	});

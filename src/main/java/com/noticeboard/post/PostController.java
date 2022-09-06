@@ -27,7 +27,9 @@ public class PostController {
 			,@RequestParam(value="selectBox", required=false) String selected 
 			,@RequestParam(value="searchWord", required=false) String searchWord 
 			) {
-		
+		int startNum = 1;
+		int endtNum = 5;
+		int pageNum = page+1;
 		double limit = 5;
 		
 		if(selected == null) {
@@ -40,11 +42,26 @@ public class PostController {
 		
 		int totalpage = (int) Math.ceil(postAllList.size()/limit); 
 		
+		if(pageNum > 5 && pageNum%5 == 1) {
+			startNum = page;
+		}
+		if(pageNum > 5 && pageNum%5 == 2) {
+			endtNum = pageNum+endtNum;
+			if(endtNum > totalpage) {
+				endtNum = totalpage;
+			}
+		}
+		
+		System.out.println(startNum);
+		System.out.println(endtNum);
+		
 		model.addAttribute("viewName", "post/post_list");
 		model.addAttribute("postList", postList);
 		model.addAttribute("totalpage", totalpage);
 		model.addAttribute("page", page);
 		model.addAttribute("selected", selected);
+		model.addAttribute("startNum", startNum);
+		model.addAttribute("endtNum", endtNum);
 		
 		return "/template/layout";
 	}
