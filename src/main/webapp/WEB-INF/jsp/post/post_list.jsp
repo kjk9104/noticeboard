@@ -91,6 +91,9 @@ $(document).ready(function(){
 		let pageNum = page+1;
 		if(pageNum >= totalpage){
 			pageNum = totalpage-1;
+			if(pageNum == -1){
+				pageNum = 0;
+			}
 		}
 		location.href="/post/post_list_view?offset="+(pageNum)+"&&selectBox="+(selected);
 	});
