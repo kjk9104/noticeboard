@@ -128,7 +128,7 @@ $(document).ready(function(){
 			,success : function(data){
 				if(data.result == "success"){
 					alert("쪽지를 보냈습니다.");
-					location.href = "/message/message_list_view"
+					location.reload(true);
 				}else{
 					alert("서버 오류");
 				}
