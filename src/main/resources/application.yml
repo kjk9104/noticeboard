@@ -8,6 +8,6 @@ spring:
       suffix: .jsp
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/noticeboard_220805?&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3307/noticeboard_220805?useSSL=false&characterEncoding=UTF-8
     username: root
     password: root
