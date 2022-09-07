@@ -29,4 +29,10 @@ public interface LikeDAO {
 	public Like getLikeByPostId(int postId);
 	
 	public void delLikeByPostId(int postId);
+	
+//	// 좋아요 순으로 리스트 뽑아오기
+//	public List<Like> selectLikeList();
+	
+	
+	
 }

@@ -54,4 +54,14 @@
  		WHERE
  			`post_id` = #{postId}
  	</select>
+ 	
+<!--  	<select id="selectLikeList" resultType="com.noticeboard.like.model.Like"> -->
+<!--  		SELECT *,count(`post_id`) -->
+<!--  		AS `coun`  -->
+<!--  		FROM `like`  -->
+<!--  		GROUP BY `post_id`  -->
+<!--  		ORDER BY `coun`  -->
+<!--  		DESC -->
+<!--  	</select> -->
+
  </mapper>
