@@ -11,6 +11,7 @@
 					<select id="selectBox">
 						<option value="최신순"<c:if test="${selected eq '최신순'}">selected</c:if>>최신순</option>
 						<option value="조회수"<c:if test="${selected eq '조회수'}">selected</c:if>>조회수</option>
+						<option value="추천수"<c:if test="${selected eq '추천수'}">selected</c:if>>추천수</option>
 					</select>
 				</th>
 				<th>제목</th>
@@ -37,10 +38,11 @@
 
 
 <c:forEach var="postList" begin="${startNum}" end="${endtNum}" varStatus="status">
-	<c:if test="${page eq status.index}">
+<%-- ${status.index}#####${status.index-1} --%>
+	<c:if test="${page eq status.index-1}">
 		<a class="offset btn btn-outline-primary mr-3" href="/post/post_list_view?offset=${status.index-1}&&selectBox=${selected}">${status.index}</a>
 	</c:if>
-	<c:if test="${page ne status.index}">
+	<c:if test="${page ne status.index-1}">
 		<a class="offset btn mr-3" href="/post/post_list_view?offset=${status.index-1}&&selectBox=${selected}">${status.index}</a>
 	</c:if>
 </c:forEach>
@@ -67,6 +69,7 @@
 
 <script>
 $(document).ready(function(){
+	
 	// 이전버튼 클릭시
 	$("#beforeBtn").on('click', function(){
 		let page = $('#beforeBtn').data('page-id');
@@ -76,6 +79,7 @@ $(document).ready(function(){
 		}
 		location.href="/post/post_list_view?offset="+(page-1)+"&&selectBox="+(selected);
 	});
+	
 	// 다음버튼 클릭시
 	$("#afterBtn").on('click', function(){
 		let page = $('#afterBtn').data('page-id');
@@ -86,7 +90,7 @@ $(document).ready(function(){
 		console.log(selected);
 		let pageNum = page+1;
 		if(pageNum >= totalpage){
-			pageNum = totalpage;
+			pageNum = totalpage-1;
 		}
 		location.href="/post/post_list_view?offset="+(pageNum)+"&&selectBox="+(selected);
 	});

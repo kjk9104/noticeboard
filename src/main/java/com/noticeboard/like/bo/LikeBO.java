@@ -43,6 +43,10 @@ public class LikeBO {
 		likeDAO.delLikeByPostId(postId);
 	}
 	
+////	 좋아요 순으로 리스트 뽑아오기
+//	public List<Like> getLikeList(){
+//		return likeDAO.selectLikeList();
+//	}
 		
 	
 }

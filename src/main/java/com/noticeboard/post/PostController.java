@@ -36,24 +36,28 @@ public class PostController {
 			selected = "최신순";
 		}
 		
+		System.out.println(selected);
 		
 		List<PostListView> postList = postBO.getPostByOffset(page, limit, selected, searchWord);
 		List<Post> postAllList = postBO.getPost();
 		
 		int totalpage = (int) Math.ceil(postAllList.size()/limit); 
 		
-		if(pageNum > 5 && pageNum%5 == 1) {
-			startNum = page;
+		if(totalpage <= endtNum) {
+			endtNum = totalpage;
 		}
-		if(pageNum > 5 && pageNum%5 == 2) {
+		
+		
+		if(pageNum > 5 && pageNum%5 == 1) {
+			startNum = pageNum;
+		}
+		if(pageNum > 5 && pageNum%5 == 1) {
 			endtNum = pageNum+endtNum;
-			if(endtNum > totalpage) {
+			if(endtNum >= totalpage) {
 				endtNum = totalpage;
 			}
 		}
 		
-		System.out.println(startNum);
-		System.out.println(endtNum);
 		
 		model.addAttribute("viewName", "post/post_list");
 		model.addAttribute("postList", postList);

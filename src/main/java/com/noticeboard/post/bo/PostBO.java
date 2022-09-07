@@ -38,6 +38,7 @@ public class PostBO {
 
 		List<Post> postList = postDAO.selectPostByOffset(offset);
 		List<PostListView> postListView = new ArrayList<>();
+//		List<Like> likeCountList=  likeBO.getLikeList();
 		
 		if(selected.equals("조회수")) {
 			postList = postDAO.selectPostByCountViewAndOffset(offset);
@@ -46,6 +47,12 @@ public class PostBO {
 		if(searchWord != null) {
 			postList = postDAO.selectPostBySerchWordAndOffset(offset, searchWord);
 		}
+		
+//		if(selected.equals( "추천수")) {
+//			for(Like like :  likeCountList) {
+//				like.getPost_id();
+//			}
+//		}
 		
 		for(Post post : postList) {
 			PostListView postView = new PostListView(); 
