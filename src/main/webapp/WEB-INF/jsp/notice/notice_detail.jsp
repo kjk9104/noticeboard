@@ -18,7 +18,7 @@
 	</div>
 </div>
 
-<<script>
+<script>
 $(document).ready(function(){
 	$("#delBtn").on('click', function(){
 		let id ="${notice.id}"

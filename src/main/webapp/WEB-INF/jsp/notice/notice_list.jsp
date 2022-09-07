@@ -44,7 +44,7 @@ $(document).ready(function(){
 		             title  : "${notice.subject}",
 		             start  : '<fmt:formatDate value="${notice.start_schedule}" pattern="yyyy-MM-dd"/>',
 		             end    : '<fmt:formatDate value="${notice.end_schedule}" pattern="yyyy-MM-dd"/>',
-		             url : "http://localhost/notice/notice_detail_view?id=${notice.id}"
+		             url : "/notice/notice_detail_view?id=${notice.id}"
 		         },
 		     </c:forEach>
 	      	]
