@@ -4,7 +4,9 @@ header {
 	height : 100px;
 	padding:20px;
 	}
-	
+footer{
+	min-height : 50px;
+}
 .content{min-height : 600px; margin: 20px;
 }
 .idInput{

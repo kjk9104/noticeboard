@@ -92,6 +92,7 @@
 <script>
 $(document).ready(function(){
 	// 닉네임 있는지 검사
+	let chkNick = true;
 	$("#recipient-name").on('change',function(){
 		let userNickname = $(this).val().trim();
 		$("#trueNickname").addClass('d-none');
@@ -103,6 +104,7 @@ $(document).ready(function(){
 			,data : {"userNickname" : userNickname}
 			,success : function(data){
 				if(data.result == "success"){
+					chkNick= false;
 					$("#trueNickname").removeClass('d-none');
 				}else{
 					$("#falseNickname").removeClass('d-none');
@@ -117,6 +119,21 @@ $(document).ready(function(){
 	$("#sendMsg").on('click',function(){
 		let otherNickname = $("#recipient-name").val().trim();
 		let msg = $("#message-text").val();
+		
+		if(otherNickname === ""){
+			alert("닉네임을 입력해주세요");
+			return;
+		}
+		
+		if(chkNick){
+			alert("닉네임을 확인해주세요");
+			return;
+		}
+		
+		if(msg === ""){
+			alert("메세지를 입력해주세요 입력해주세요");
+			return;
+		}
 		
 		$.ajax({
 			type : "post"

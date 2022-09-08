@@ -72,8 +72,10 @@
 
 <script>
 $(document).ready(function(){
+	
 	// 닉네임 있는지 검사
-	$("#recipient-name").on('keyup',function(){
+	let chkNick = true;
+	$("#recipient-name").on('change',function(){
 		let userNickname = $(this).val().trim();
 		$("#trueNickname").addClass('d-none');
 		$("#falseNickname").addClass('d-none');
@@ -84,6 +86,7 @@ $(document).ready(function(){
 			,data : {"userNickname" : userNickname}
 			,success : function(data){
 				if(data.result == "success"){
+					chkNick= false;
 					$("#trueNickname").removeClass('d-none');
 				}else{
 					$("#falseNickname").removeClass('d-none');
@@ -95,9 +98,25 @@ $(document).ready(function(){
 		});
 	});
 	
+	// 쪽지 보내기
 	$("#sendMsg").on('click',function(){
 		let otherNickname = $("#recipient-name").val().trim();
 		let msg = $("#message-text").val();
+		
+		if(otherNickname === ""){
+			alert("닉네임을 입력해주세요");
+			return;
+		}
+		
+		if(chkNick){
+			alert("닉네임을 확인해주세요");
+			return;
+		}
+		
+		if(msg === ""){
+			alert("메세지를 입력해주세요 입력해주세요");
+			return;
+		}
 		
 		$.ajax({
 			type : "post"
@@ -118,6 +137,11 @@ $(document).ready(function(){
 				alert("통신 오류");
 			}
 		});
-		
-	})
+	});
+	
+	
+	
+	
+	
+});
 </script>	

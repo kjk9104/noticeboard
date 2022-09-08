@@ -20,7 +20,7 @@ public class PostController {
 	@Autowired
 	private PostBO postBO;
 	
-	// http://localhost/post/post_list_view
+	// http://localhost/post/post_list_view?offset=0
 	@RequestMapping("/post_list_view")
 	public String postList(Model model
 			,@RequestParam(value="offset", required=false) int page 
