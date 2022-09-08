@@ -28,13 +28,13 @@
 </head>
 <body>
 	<div id="wrap">
-		<header class="bg-success bg-opacity-25">
+		<header class="bg-dark bg-opacity-25">
 			<jsp:include page="../include/gnb.jsp"/>
 		</header>
 		<section class="content">
 			<jsp:include page="../${viewName}.jsp"/>
 		</section>
-		<footer class="bg-success">
+		<footer class="bg-dark border d-flex flex-wrap align-content-center">
 			<jsp:include page="../include/footer.jsp"/>
 		</footer>
 	</div>

@@ -11,7 +11,7 @@
 					<select id="selectBox">
 						<option value="최신순"<c:if test="${selected eq '최신순'}">selected</c:if>>최신순</option>
 						<option value="조회수"<c:if test="${selected eq '조회수'}">selected</c:if>>조회수</option>
-						<option value="추천수"<c:if test="${selected eq '추천수'}">selected</c:if>>추천수</option>
+<%-- 						<option value="추천수"<c:if test="${selected eq '추천수'}">selected</c:if>>추천수</option> --%>
 					</select>
 				</th>
 				<th>제목</th>
