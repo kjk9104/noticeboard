@@ -74,6 +74,10 @@
   - 3일
 총 25일 소요
 ## DB
+### 관계 테이블
+![image](https://user-images.githubusercontent.com/83809806/189813399-b64920b4-812c-4914-8cae-4d15956ce16a.png)
+
+
 ### user table
 ![image](https://user-images.githubusercontent.com/83809806/189807625-157cf177-a18f-435a-a81e-b84ac3b772fe.png)
 ### post table
