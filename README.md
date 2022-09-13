@@ -73,6 +73,10 @@
 - test 기간
   - 3일
 총 25일 소요
+
+## 버전
+1.0v
+
 ## DB
 ### 관계 테이블
 ![image](https://user-images.githubusercontent.com/83809806/189813399-b64920b4-812c-4914-8cae-4d15956ce16a.png)
