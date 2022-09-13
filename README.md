@@ -74,7 +74,21 @@
   - 3일
 총 25일 소요
 ## DB
+### user table
 ![image](https://user-images.githubusercontent.com/83809806/189807625-157cf177-a18f-435a-a81e-b84ac3b772fe.png)
+### post table
+![image](https://user-images.githubusercontent.com/83809806/189807769-b8d23941-3338-4dc0-8c05-1da55cc2cfbc.png)
+### comment table
+![image](https://user-images.githubusercontent.com/83809806/189807832-ec27d072-f144-4f06-bb5b-e8a05c7018f6.png)
+### comment_comment table
+![image](https://user-images.githubusercontent.com/83809806/189807880-87e86227-ebc5-4b9e-863e-4cc560d30367.png)
+### like table
+![image](https://user-images.githubusercontent.com/83809806/189807956-18d700ea-bfb0-4f88-9ffc-4f8f6d5878bf.png)
+### message table
+![image](https://user-images.githubusercontent.com/83809806/189808015-ca8149bb-f898-4c87-8cb0-5ecfc6d716a2.png)
+### notice table
+![image](https://user-images.githubusercontent.com/83809806/189808108-7f7e70fd-2b6a-4bf7-a7ad-ae9cd17cdc71.png)
+
 
 ## 기능 설명
 ### user
