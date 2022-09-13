@@ -79,7 +79,7 @@
 
 ## DB
 ### 관계 테이블
-![image](https://user-images.githubusercontent.com/83809806/189813399-b64920b4-812c-4914-8cae-4d15956ce16a.png)
+![image](https://user-images.githubusercontent.com/83809806/189837319-888f20d4-7b00-4db6-b414-a24a8ff1877d.png)
 
 
 ### user table
