@@ -73,6 +73,8 @@
 - test 기간
   - 3일
 총 25일 소요
+## DB
+![image](https://user-images.githubusercontent.com/83809806/189807625-157cf177-a18f-435a-a81e-b84ac3b772fe.png)
 
 ## 기능 설명
 ### user
