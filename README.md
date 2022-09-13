@@ -151,3 +151,8 @@
 - 메세지 상세 페이지 만들기
 - 게시물 작성 할때 이미지를 같이 넣을수 있도록
 - 게시물 유저 닉네임으로 검색 
+
+## AWS 서버
+http://54.153.105.204:8080/user/sign_in_view
+## 기획서
+https://ovenapp.io/project/E54dNnlEFfRynjzfmU6CaQEqceVRJuJ2#B4RJh
