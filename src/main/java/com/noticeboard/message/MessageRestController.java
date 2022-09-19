@@ -73,7 +73,22 @@ public class MessageRestController {
 	} 
 	
 	
-	
+	@RequestMapping("/delete")
+	public Map<String, Object> messageDel(){
+		Map<String, Object> result = new HashMap<>();
+		// id 값을 토대로 message의 receive_message 와 send_message 갖고 오기
+		
+		// N 삭제 Y 미삭제
+		// 둘다 N 테이블 삭제
+		// 하나만 
+		
+		
+		
+		
+		// 결과
+		result.put("result", "success");
+		return result;
+	}
 	
 	
 	
