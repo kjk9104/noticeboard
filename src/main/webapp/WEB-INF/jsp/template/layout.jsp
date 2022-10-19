@@ -23,8 +23,14 @@
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
+	<!-- 서머노트를 위해 추가해야할 부분 -->
+  	<script src="/static/summernote-0.8.18-dist/summernote-lite.js"></script>
+  	<script src="/static/summernote-0.8.18-dist/lang/summernote-ko-KR.min.js"></script>
+  	<link rel="stylesheet" href="/static/summernote-0.8.18-dist/summernote-lite.min.css">
+  	
 	<!-- 스타일 시트  -->
 	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+	
 </head>
 <body>
 	<div id="wrap">

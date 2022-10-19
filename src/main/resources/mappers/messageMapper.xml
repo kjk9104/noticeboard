@@ -29,6 +29,8 @@
  			`message`
  		WHERE
  			`other_nick_name`= #{otherNick}
+ 		ORDER BY `id` DESC
+ 			
  	</select>
  	
  	<!--보낸 메일함 -->
@@ -39,5 +41,6 @@
  			`message`
  		WHERE
  			`user_nickName`= #{userNick}
+ 		ORDER BY `id` DESC
  	</select>
  </mapper>

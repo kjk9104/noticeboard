@@ -36,12 +36,12 @@
 				<td>${message.user_nickName}</td>
 				
 				<td>
-					<a href="#">
+					<a class="message_dtail" href="#" data-message-id="${message.id}">
 						<c:if test="${fn.length(message.talk) > 15}">
 							${fn:substring(message.talk,0,15)}...
 						</c:if>	
 						<c:if test="${fn:length(message.talk) <= 15}">
-												${message.talk}
+							${message.talk}
 						</c:if>
 					</a>
 				</td>
@@ -115,7 +115,25 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
+	$(".message_dtail").on('click', function(){
+		let messageId = $(this).data("message-id");
+		$.ajax({
+			url : "/message/detail_view"
+			,data : {
+				"id" : messageId
+			}
+			,success : function(data){
+				if(data.result == "success"){
+// 					location.href ="/message/detail_view"
+				}else{
+					alert("서버 오류");
+				}
+			}
+			,error : function(e){
+				alert("통신 오류");
+			}
+		});
+	});
 	$("#sendMsg").on('click',function(){
 		let otherNickname = $("#recipient-name").val().trim();
 		let msg = $("#message-text").val();

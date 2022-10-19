@@ -8,7 +8,7 @@
 				<input id="subject" type="text" class="form-control">
 			</div>
 		<h3>내용</h3>
-		<textarea id="content" rows="20" cols="135"></textarea>
+		<textarea class="summernote" id="content" rows="20" cols="135"></textarea>
 		<div class="d-flex justify-content-between">
 			<input id="file" type="file" accept=".jpg,.png,.gif,.jpeg">
 			<button id="postListBtn" type="button" class="btn btn-dark mb-2">목록</button>
@@ -21,6 +21,11 @@
 </div>
 <script>
 $(document).ready(function(){
+	// 서머노트
+	$('.summernote').summernote({
+		  height: 500,
+		  lang: "ko-KR"
+		});
 	// 목록 버튼
 	$("#postListBtn").on('click', function(){
 		location.href = "/post/post_list_view?offset=0";
