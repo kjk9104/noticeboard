@@ -15,6 +15,9 @@ public interface PostDAO {
 	// 게시물 조회수 리스트 목록 
 	public List<Post> selectPostByCountViewAndOffset(int offset);
 	
+	// 게시물 좋아요순 리스트 목록 
+	public List<Post> selectPostBylikeViewAndOffset(int offset);
+	
 	// 게시물 검색어 최신순 목록
 	public List<Post> selectPostBySerchWordAndOffset(
 			@Param("offset") int offset

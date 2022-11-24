@@ -29,13 +29,13 @@ public class PermissionInterceptor implements HandlerInterceptor{
 		logger.info("################## uri:{}", uri );
 		
 		// 비로그인 && "/post" => 로그인 페이지로 리다이렉트
-		if(userNickname == null && uri.startsWith("/post") || userNickname == null && uri.startsWith("/notice") || userNickname == null && uri.startsWith("/message")) {
+		if(userNickname == null && uri.startsWith("/post") || userNickname == null && uri.startsWith("/notice") || userNickname == null && uri.startsWith("/message") || userNickname == null && uri.equals("/user/detail_view")) {
 			response.sendRedirect("/user/sign_in_view");
 			return false;
 		}
 		
 		// 로그인 && "/user" => 글 목록 페이지로 리다이렉트 
-		if(userNickname != null && uri.startsWith("/user")) {
+		if(userNickname != null && uri.startsWith("/user") && !uri.equals("/user/detail_view")) {
 			response.sendRedirect("/post/post_list_view?offset=0");
 			return false;
 		}

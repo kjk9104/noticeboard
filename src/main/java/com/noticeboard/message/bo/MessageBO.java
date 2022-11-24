@@ -28,4 +28,25 @@ public class MessageBO {
 		return messageDAO.selectMessageListByNickFromUserNick(userNick);
 		
 	}
+	
+	// id 값으로 삭제 Message list 갖고 오기
+	public Message getMsgListByid(int id){
+		return messageDAO.selectMsgListByid(id);
+	}
+	
+	// id 값으로 send_message 값 false로 수정 
+	public void updateSendMsgById(int id) {
+		messageDAO.updateSendMsgById(id);
+	}
+	
+	// id 값으로 receive_message 값 false로 수정 
+	public void updateReceiveMsgById(int id) {
+		messageDAO.updateReceiveMsgById(id);
+	}
+	
+	// id 값으로 message 삭제 
+	public void delMsgbyId(int id) {
+		messageDAO.delMsgbyId(id);
+	}
+	
 }

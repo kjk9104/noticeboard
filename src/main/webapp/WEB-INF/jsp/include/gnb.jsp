@@ -8,10 +8,11 @@
 	  	<a class="navbar-brand text-light" href="/post/post_list_view?offset=0">게시판</a>
 	  	<a class="navbar-brand text-light" href="/message/message_receive_list_view">쪽지</a>
 	  	<a class="navbar-brand text-light" href="/notice/notice_list_view">공지일정</a>
+	  	<a class="navbar-brand text-light" href="/user/detail_view">회원 정보</a>
 	  </div>
 	  <div class="d-flex mt-4">
 		  <c:if test="${not empty userNickname}">
-		  	<span class="text-light"> ${userNickname}<span> <a class="text-success" href="/user/sign_out">로그 아웃</a>
+		  	<span class="text-light"> ${userNickname}</span> <a class="text-success" href="/user/sign_out">로그 아웃</a>
 		  </c:if>
 	  </div>
   </div>

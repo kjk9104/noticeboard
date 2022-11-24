@@ -19,9 +19,6 @@ public class MessageConteroller {
 	@Autowired
 	private MessageBO messageBO;
 	
-	
-	
-	
 	// http://localhost/message/message_receive_list_view
 	@RequestMapping("/message_receive_list_view")
 	public String messageReceiveListView(

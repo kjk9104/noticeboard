@@ -2,14 +2,21 @@ package com.noticeboard.user;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.noticeboard.user.bo.UserBO;
+import com.noticeboard.user.model.User;
 
 @Controller
 @RequestMapping("/user")
 public class userController {
 
+	@Autowired
+	private UserBO userBO;
+	
 	// http://localhost/user/sign_in_view
 	@RequestMapping("/sign_in_view")
 	public String signInView(Model model) {
@@ -36,5 +43,20 @@ public class userController {
 		session.removeAttribute("userNickname");
 		
 		return "redirect:/user/sign_in_view";
+	}
+	
+	// http://localhost/user/detail_view
+	@RequestMapping("/detail_view")
+	public String detail(Model model
+			,HttpSession session) {
+		
+		int userid = (int) session.getAttribute("userId");
+		
+		User user = userBO.getByUserId(userid);
+		
+		model.addAttribute("viewName","user/user_detail");
+		model.addAttribute("user", user);
+		
+		return "/template/layout";
 	}
 }

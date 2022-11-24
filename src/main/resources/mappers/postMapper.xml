@@ -40,6 +40,15 @@
  		ORDER BY `countView` DESC limit 5 offset #{offset}
  	</select>
  	
+ 	<!-- 좋아요 순 목록 select  -->
+ 	<select id="selectPostBylikeViewAndOffset" resultType="com.noticeboard.post.model.Post">
+ 		SELECT p.id, p.user_id, p.subject, p.content, p.countView, p.createdAt, p.updatedAt, l.count
+        FROM `post` p
+        LEFT OUTER JOIN (select `id`,`post_id`,count(`post_id`)AS count FROM `like` GROUP by `post_id` ORDER BY count DESC) l
+        ON p.id = l.post_id
+        ORDER BY l.count DESC LIMIT 5 OFFSET #{offset};
+ 	</select>
+ 	
  	<!-- 검색어 최신순 목록 select  -->
  	<select id="selectPostBySerchWordAndOffset" resultType="com.noticeboard.post.model.Post" parameterType="Map">
  		SELECT

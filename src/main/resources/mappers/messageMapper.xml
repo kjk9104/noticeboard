@@ -8,6 +8,8 @@
 			`user_nickName`
 			,`other_nick_name`
 			,`talk`
+			,`send_message`
+			,`receive_message`
 			,`createdAt`
 			,`updatedAt`
  		)
@@ -16,6 +18,8 @@
         	#{userNick}
         	,#{otherNick}
         	,#{talk}
+        	,true
+        	,true
         	,NOW()
         	,NOW()
         );
@@ -29,6 +33,7 @@
  			`message`
  		WHERE
  			`other_nick_name`= #{otherNick}
+ 			AND`receive_message` = true
  		ORDER BY `id` DESC
  			
  	</select>
@@ -41,6 +46,46 @@
  			`message`
  		WHERE
  			`user_nickName`= #{userNick}
+ 			AND`send_message` = true
  		ORDER BY `id` DESC
  	</select>
+ 	
+ 	<!-- id 값으로 갖고오는 삭제 리스트  -->
+ 	<select id="selectMsgListByid" resultType="com.noticeboard.message.model.Message">
+ 		SELECT
+ 			*
+<!--  			`send_message`, -->
+<!--  			`receive_message` -->
+ 		FROM
+ 			`message`
+ 		WHERE
+ 			`id` = #{id}
+ 	</select>
+ 	
+<!--  	 id 값으로 send_message 값 false로 수정  -->
+ 	<update id="updateSendMsgById" parameterType="Map">
+ 		UPDATE
+ 			`message`
+ 		SET 
+ 			`send_message` = false
+ 		WHERE
+ 			`id` = #{id}
+ 	</update>
+ 	
+ <!--  	 id 값으로 receive_message 값 false로 수정  -->
+ 	<update id="updateReceiveMsgById" parameterType="Map">
+ 		UPDATE
+ 			`message`
+ 		SET 
+ 			`receive_message` = false
+ 		WHERE
+ 			`id` = #{id}
+ 	</update>
+<!-- id 값으로 message 삭제  --> 	
+	<delete id="delMsgbyId">
+		DELETE FROM
+ 			`message`
+ 		WHERE
+ 			`id` = #{id}
+	</delete>
  </mapper>

@@ -21,22 +21,22 @@
 
 <h1 class="d-flex justify-content-center mb-5">받은 메세지 함</h1>
 <div class="d-flex justify-content-center">
-	<table id="msg_table" class="table">
+	<table id="msg_table" class="table table-striped">
 		<thead>
 			<tr>
-				<th>반호</th>
+				<th>번호</th>
 				<th>보낸사람</th>
 				<th>쪽지 내용</th>
+				<th class="text-center">삭제</th>
 			</tr>
 		</thead>
-	<c:forEach var="message" items="${MessageList}" varStatus ="status">
 		<tbody>
+			<c:forEach var="message" items="${MessageList}" varStatus ="status">
 			<tr>
 				<td>${status.count}</td>
 				<td>${message.user_nickName}</td>
-				
 				<td>
-					<a class="message_dtail" href="#" data-message-id="${message.id}">
+					<a class="message_detail" href="#" data-message-id="${message.id}">
 						<c:if test="${fn.length(message.talk) > 15}">
 							${fn:substring(message.talk,0,15)}...
 						</c:if>	
@@ -45,14 +45,21 @@
 						</c:if>
 					</a>
 				</td>
+				<td class="text-center ">
+					<input class="chk_box" type="checkbox" name="check_box" value="${message.id}">
+				</td>
 			</tr>
+			</c:forEach>
 		</tbody>
-	</c:forEach>
 	</table>
 </div>
 
-
-
+<div class="d-flex justify-content-end">
+	<a href="#" class="mb-3" id="all_chk">전체선택</a>
+</div>
+<div class="d-flex justify-content-end">
+	<a href="#" class="btn btn-danger" id="del_message">삭제</a>
+</div>
 
 
 
@@ -115,7 +122,8 @@ $(document).ready(function(){
 			}
 		});
 	});
-	$(".message_dtail").on('click', function(){
+	// 쪽지 자세히 보기
+	$(".message_detail").on('click', function(){
 		let messageId = $(this).data("message-id");
 		$.ajax({
 			url : "/message/detail_view"
@@ -134,6 +142,8 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	// 메세지 보내기
 	$("#sendMsg").on('click',function(){
 		let otherNickname = $("#recipient-name").val().trim();
 		let msg = $("#message-text").val();
@@ -175,9 +185,44 @@ $(document).ready(function(){
 		
 	})
 	
+	// 전체 체크
+	$("#all_chk").on("click", function(){
+		 if($('.chk_box').is(':checked')){
+			 	$('.chk_box').prop('checked',false);
+		    }else{
+		   		$('.chk_box').prop('checked',true);
+		    }
+	});
 	
-	
-	
+	// 메세지 삭제
+	$("#del_message").on("click", function(){
+		let chk_arr = [];
+		$("input:checkbox[name='check_box']:checked").each(function(i, i_val){
+			chk_arr.push(i_val);
+			let id = i_val.value;
+			
+			$.ajax({
+				type : "delete"
+				,url : "/message/receive/delete"
+				,data : {
+					"id" : id
+				}
+				,success : function(data){
+					if(data.result == "success"){
+						alert("쪽지를 삭제했습니다.");
+						location.reload(true);
+					}else{
+						alert("서버 오류");
+					}
+				}
+				,erorr : function(e){
+					alert("통신 오류");
+				}
+			});
+			
+		});
+		
+	});
 	
 	
 	

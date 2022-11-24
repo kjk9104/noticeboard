@@ -4,14 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="d-flex justify-content-center">
 	<div class="title"> <h1>자유 게시판</h1> </div>
-	<table class="table">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>
 					<select id="selectBox">
 						<option value="최신순"<c:if test="${selected eq '최신순'}">selected</c:if>>최신순</option>
 						<option value="조회수"<c:if test="${selected eq '조회수'}">selected</c:if>>조회수</option>
-<%-- 						<option value="추천수"<c:if test="${selected eq '추천수'}">selected</c:if>>추천수</option> --%>
+						<option value="추천수"<c:if test="${selected eq '추천수'}">selected</c:if>>추천수</option>
 					</select>
 				</th>
 				<th>제목</th>
@@ -20,8 +20,8 @@
 				<th>추천수</th>
 			</tr>
 		</thead>
-		<c:forEach var="postList" items="${postList}" varStatus="status">
 		<tbody>
+		<c:forEach var="postList" items="${postList}" varStatus="status">
 			<tr>
 				<td>${status.count}</td>
 				<td><a href="/post/post_detail_view?postId=${postList.post.id}">${postList.post.subject}</a></td>
@@ -29,8 +29,8 @@
 				<td>${postList.post.countView}</td>
 				<td>${postList.likeSize}</td>
 			</tr>
+			</c:forEach>
 		</tbody>
-		</c:forEach>
 	</table>
 </div>
 <div class="d-flex justify-content-center">
@@ -100,10 +100,8 @@ $(document).ready(function(){
 	
 	// 셀렉트 박스 최신수 조회수 추천수 
 	$("#selectBox").on('change',function(){
-		let page = $('#afterBtn').data('page-id');
 		let selected = $(this).val();
-
-		location.href="/post/post_list_view?offset="+(page)+"&&selectBox="+(selected);
+		location.href="/post/post_list_view?offset=0&&selectBox="+(selected);
 		
 	});
 	

@@ -48,11 +48,9 @@ public class PostBO {
 			postList = postDAO.selectPostBySerchWordAndOffset(offset, searchWord);
 		}
 		
-//		if(selected.equals( "추천수")) {
-//			for(Like like :  likeCountList) {
-//				like.getPost_id();
-//			}
-//		}
+		if(selected.equals( "추천수")) {
+			postList = postDAO.selectPostBylikeViewAndOffset(offset);
+		}
 		
 		for(Post post : postList) {
 			PostListView postView = new PostListView(); 
@@ -97,7 +95,7 @@ public class PostBO {
 	}
 	
 	// 게시물 상세 정보
-	public PostDetail getPostDetail(int postId, int userIdex){
+	public PostDetail getPostDetail(int postId, int userIdex, Integer sessionPostId){
 		PostDetail postDetail = new PostDetail();
 		
 		
@@ -107,7 +105,7 @@ public class PostBO {
 		User user = userBO.getByUserId(userId);
 		
 		int countView = post.getCountView();
-		updateCountView(postId,countView);
+		updateCountView(postId,countView,sessionPostId);
 		List<CommentView> commentViewList = commentBO.generateCommentVeiwListByPostId(postId);
 		
 		boolean like = likeBO.getLikeByuserIdAndPostId(postId, userIdex);
@@ -155,8 +153,10 @@ public class PostBO {
 		postDAO.updatePost(postId, subject, content, imagePath);
 	}
 	
-	public void updateCountView(int postId, int countView) {
-		countView++;
+	public void updateCountView(int postId, int countView, Integer sessionPostId) {
+		if(postId != sessionPostId) {
+			countView++;
+		}
 		postDAO.updateCountView(postId, countView);
 	}
 }

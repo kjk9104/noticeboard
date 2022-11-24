@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -120,5 +121,20 @@ public class userRestController {
 		return result;
 	}
 	
-	
+	/**
+	 * 회원 탈퇴
+	 * @param userId
+	 * @return
+	 */
+	@DeleteMapping("/delete")
+	public Map<String, Object> userDel(
+			@RequestParam("userId") int userId
+			){
+		Map<String, Object> result = new HashMap<>();
+		
+		
+		
+		result.put("result", "success");
+		return result;
+		}
 }

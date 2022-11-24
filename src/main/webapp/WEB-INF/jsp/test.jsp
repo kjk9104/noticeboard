@@ -36,32 +36,32 @@ $(document).ready(function(){
 		  placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
 			callbacks: {	//여기 부분이 이미지를 첨부하는 부분
 				onImageUpload : function(files) {
-					uploadSummernoteImageFile(files[0],this);
+				console.log(files);
 				},
-				onPaste: function (e) {
-					var clipboardData = e.originalEvent.clipboardData;
-					if (clipboardData && clipboardData.items && clipboardData.items.length) {
-						var item = clipboardData.items[0];
-						if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-							e.preventDefault();
-						}
-					}
-				}
+// 				onPaste: function (e) {
+// 					var clipboardData = e.originalEvent.clipboardData;
+// 					if (clipboardData && clipboardData.items && clipboardData.items.length) {
+// 						var item = clipboardData.items[0];
+// 						if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+// 							e.preventDefault();
+// 						}
+// 					}
+// 				}
 			}
 		});
+
 	
-	$("#sendBtn").on("click", function(){
-		let summernote = $(".summernote").val();
-		console.log(summernote);
-		alert("확인");
-		
-	});
+	/**
+	* 이미지 파일 업로드
+	*/
+	function uploadSummernoteImageFile(file, editor) {
+		console.log(file);
+		console.log(editor);
+	};
 	
-// 	$.ajax({
-// 		type : "post"
-// 		,url : "/test/create"
-// 		,data : {}
-// 	});
+	
+	$('.summernote').summernote('backColor', 'red');
+
 });
 
 </script>

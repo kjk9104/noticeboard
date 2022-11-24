@@ -21,4 +21,19 @@ public interface MessageDAO {
 	
 	// 세션의 닉네임으로 검색하는 보낸 메일 리스트
 	public List<Message> selectMessageListByNickFromUserNick(String userNick);
+	
+	// id 값으로 삭제 Message list 갖고 오기
+	public Message selectMsgListByid(int id);
+		
+	// id 값으로 send_message 값 false로 수정 
+	public void updateSendMsgById(int id);
+	
+	// id 값으로 receive_message 값 false로 수정 
+	public void updateReceiveMsgById(int id);
+	
+	// id 값으로 message 삭제 
+	public void delMsgbyId(int id);
+	
+	
+		
 }

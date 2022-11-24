@@ -7,6 +7,8 @@ public class Message {
 	private String user_nickName;
 	private String other_nick_name;
 	private String talk;
+	private boolean receive_message;
+	private boolean send_message;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -34,6 +36,18 @@ public class Message {
 	public void setTalk(String talk) {
 		this.talk = talk;
 	}
+	public boolean isReceive_message() {
+		return receive_message;
+	}
+	public void setReceive_message(boolean receive_message) {
+		this.receive_message = receive_message;
+	}
+	public boolean isSend_message() {
+		return send_message;
+	}
+	public void setSend_message(boolean send_message) {
+		this.send_message = send_message;
+	}
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -46,6 +60,8 @@ public class Message {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
+	
 	
 	
 }

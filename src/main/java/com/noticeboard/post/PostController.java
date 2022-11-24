@@ -36,7 +36,6 @@ public class PostController {
 			selected = "최신순";
 		}
 		
-		System.out.println(selected);
 		
 		List<PostListView> postList = postBO.getPostByOffset(page, limit, selected, searchWord);
 		List<Post> postAllList = postBO.getPost();
@@ -88,8 +87,17 @@ public class PostController {
 			,HttpSession session
 			) {
 		
+			
 		int userId = (int) session.getAttribute("userId");
-		PostDetail postDetail = postBO.getPostDetail(postId, userId);
+		Integer sessionPostId = (Integer) session.getAttribute("postId");
+		
+		if(sessionPostId == null) {
+			sessionPostId = 0;
+		}
+		
+		PostDetail postDetail = postBO.getPostDetail(postId, userId, sessionPostId);
+		
+		session.setAttribute("postId", postId);
 		
 		model.addAttribute("viewName", "post/post_detail");
 		model.addAttribute("post", postDetail);
